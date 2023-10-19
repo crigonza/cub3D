@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:56:19 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/18 21:00:44 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/10/19 18:56:02 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,42 @@ int checknl(char *s)
     }
     return (0);
 }
+char *my_calloc(int len, int size)
+{
+    int i = 0;
+    char *str;
+
+    if (len < 0)
+        return(NULL);
+    str = (char *)malloc(len * size);
+    while (i < len)
+        str[i++] = '\0';
+    return(str);
+}
+
+char *my_strjoin(char *s1, char *s2)
+{
+    int i = 0;
+    int j = 0;
+    char *join;
+
+    if (!s1)
+        s1 = my_calloc(1, sizeof(char));
+    if (!s1 && !s2)
+        return(NULL);
+    if (!s2)
+        return(s1);
+    join = my_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
+    while (s1[i])
+    {
+        join[i] = s1[i];
+        i++;
+    }
+    while (s2[j])
+        join[i++] = s2[j++];
+    free (s1);
+    return(join);
+}
 
 char *get_line(char *st)
 {
@@ -36,7 +72,7 @@ char *get_line(char *st)
         i++;
     if (st[i] == '\n')
         i++;
-    line = ft_calloc(i + 1, sizeof(char));
+    line = my_calloc(i + 1, sizeof(char));
     i = 0;
     while (st[i] && st[i] != '\n')
     {
@@ -61,28 +97,49 @@ char *get_st(char *st)
     if (st[i] == '\0')
         return(free(st), NULL);
     i++;
-    new = ft_calloc((ft_strlen(st) - i) + 1, sizeof(char));
+    new = my_calloc((ft_strlen(st) - i) + 1, sizeof(char));
     while(st[i])
         new[j++] = st[i++];
     free(st);
     return (new);
 }
 
-char    *get_next_line(int fd)
+char *get_next_line(int fd)
 {
-    static char     *stach;
+    static char *st = NULL;
+    char *line = NULL;
+    char buffer[BUFFER_SIZE + 1];
+    int rd = 1;
+
+    if (fd < 0 || BUFFER_SIZE <= 0)
+        return(NULL);
+    while (rd > 0 && checknl(st) == 0)
+    {
+        rd = read(fd, buffer, BUFFER_SIZE);
+        if (rd == -1)
+            return(free(st), NULL);
+        buffer[rd] = '\0';
+        st = my_strjoin(st, buffer);
+    }
+    line = get_line(st);
+    st = get_st(st);
+    return(line);
+}
+
+/* char    *get_next_line(int fd)
+{
+    static char     *stach = NULL;
     char            *line;
     char            buffer[5];
     int             rd;
 
     rd = 1;
-    stach = NULL;
     line = NULL;
     if (fd < 0)
         return (NULL);
     while (rd > 0 && checknl(stach) == 0)
     {
-        rd = read(fd, buffer, 5);
+        rd = read(fd, buffer, 3);
         if (rd == -1)
         {
             free (stach);
@@ -94,4 +151,4 @@ char    *get_next_line(int fd)
     line = get_line(stach);
     stach = get_st(stach);
     return(line);
-}
+} */
