@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:29:04 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/19 18:08:07 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/10/19 20:18:04 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ int main(int argc, char **argv)
         exit(EXIT_FAILURE);
     parser(data, argv[1]);
 
-    //system("leaks --q fdf");
+    system("leaks --q cub3d");
     return (0);
 }

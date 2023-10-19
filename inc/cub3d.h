@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:23:24 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/19 19:09:32 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/10/19 21:28:31 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,26 @@
 
 #define BUFFER_SIZE 5
 
+typedef struct s_color
+{
+    int     red;
+    int     green;
+    int     blue;
+}           t_color;
+
 typedef struct s_data
 {
     char        *north;
     char        *south;
     char        *west;
     char        *east;
-    uint32_t    floor;
-    uint32_t    ceiling;
+    t_color     floor;
+    t_color     ceiling;
+    int         map_start;
+    int         map_lines;
     char        **map; 
 }           t_data;
+
 
 
 //gnl.c//
