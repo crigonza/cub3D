@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 17:33:16 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/19 21:38:46 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/10/20 17:14:45 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_color    get_color(char *rgb)
         }
         free (rgb_split);
     }
+    free (rgb);
     return (color);
 }
 
@@ -42,11 +43,10 @@ int     spaces_line(char *line)
     i = 0;
     while (line[i])
     {
-        if (line[i] != ' ' || line[i] != '\n')
+        if (line[i] != ' ' && line[i] != '\n')
             return (0);
         i++;
     }
-    printf("ok");
     return (1);
 }
 
@@ -59,10 +59,10 @@ void    map_data(t_data *data, int fd, int lines)
     map_len = 0;
     while (line = get_next_line(fd))
     {
-        if (spaces_line(line))
-            lines++;
-        else
+        if (!spaces_line(line))
             map_len++;
+        else
+            lines++;
         free (line);
     }
     data->map_lines = map_len;
@@ -95,8 +95,8 @@ void    parse_textures(t_data *data, int fd)
     char    *line;
     int     lines;
 
-    line = NULL;
     lines = 0;
+    line = NULL;
     while (line = get_next_line(fd))
     {
         if (!ft_strncmp(line, "NO ", 3))
@@ -115,13 +115,46 @@ void    parse_textures(t_data *data, int fd)
     parse_colors(data, fd, lines);
 }
 
+void    parse_map(t_data *data, int fd)
+{
+    int     i;
+    char    *line;
+
+    i = 0;
+    line = NULL;
+    data->map = (char *)malloc(sizeof(char) * data->map_lines);
+    while (i < data->map_lines)
+    {
+        line = get_next_line(fd);
+        data->map[i] = ft_strdup(line);
+        free (line);
+        i++;
+    }
+    i = 0;
+    /* while (i < data->map_lines)
+    {
+        printf("%s", data->map[i]);
+        i++;
+    } */
+}
+
 void    parser(t_data *data, char *file)
 {
+    char    *line;
+    int     lines;
     int     fd;
 
     fd = open(file, O_RDONLY);
     parse_textures(data, fd);
     close (fd);
-    printf("%d\n", data->map_lines);
-    printf("%d\n", data->map_start);
+    lines = data->map_start;
+    fd = open(file, O_RDONLY);
+    while (lines > 0)
+    {
+        line = get_next_line(fd);
+        free (line);
+        lines--;
+    }
+    parse_map(data, fd);
+    close (fd);
 }

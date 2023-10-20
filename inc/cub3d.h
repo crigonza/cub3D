@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:23:24 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/19 21:28:31 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/10/20 17:18:23 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ typedef struct s_color
     int     blue;
 }           t_color;
 
+typedef struct s_player
+{
+    double      x;
+    double      y;
+    double      dir_x;
+    double      dir_y;
+}           t_player;
+
 typedef struct s_data
 {
     char        *north;
@@ -39,7 +47,8 @@ typedef struct s_data
     t_color     ceiling;
     int         map_start;
     int         map_lines;
-    char        **map; 
+    char        **map;
+    t_player    player; 
 }           t_data;
 
 
