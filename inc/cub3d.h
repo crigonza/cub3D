@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:23:24 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/20 17:18:23 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/10/20 20:11:02 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 #include <math.h>
 #include <fcntl.h>
 
-#define BUFFER_SIZE 5
+#define WIN_W 512
+#define WIN_H 512
 
 typedef struct s_color
 {
@@ -31,10 +32,10 @@ typedef struct s_color
 
 typedef struct s_player
 {
-    double      x;
-    double      y;
-    double      dir_x;
-    double      dir_y;
+    int      x;
+    int      y;
+    int      dir_x;
+    int      dir_y;
 }           t_player;
 
 typedef struct s_data
@@ -52,15 +53,24 @@ typedef struct s_data
 }           t_data;
 
 
-
-//gnl.c//
-/* int         checknl(char *s);
-char        *get_line(char *st);
-char        *get_st(char *st); */
-char        *get_next_line(int fd);
+//checker.c//
+void        set_dir(t_player player, char dir);
+int         check_player(t_data *data);
+int         check_data(t_data *data);
+//main.c//
+int         check_args(int argc, char **argv);
+void        parse_and_check(t_data *data, char *file);
+int main(int argc, char **argv);
+//parser_utils//
+int         spaces_line(char *line);
+t_color     get_color(char *rgb);
 //parser.c//
+void        map_data(t_data *data, int fd, int lines);
+void        parse_colors(t_data *data, int fd, int lines);
 void        parse_textures(t_data *data, int fd);
-void        parser(t_data *data, char *file);
+void        parse_map(t_data *data, int fd);
+//utils.c//
+char        *get_next_line(int fd);
 
 
 

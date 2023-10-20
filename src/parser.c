@@ -6,49 +6,11 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 17:33:16 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/20 17:14:45 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/10/20 18:56:35 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-t_color    get_color(char *rgb)
-{
-    char        **rgb_split;
-    t_color     color;
-    int         i;
-    
-    i = 0;
-    rgb_split = ft_split(rgb, ',');
-    color.red = ft_atoi(rgb_split[0]);
-    color.blue = ft_atoi(rgb_split[1]);
-    color.green = ft_atoi(rgb_split[2]);
-    if (rgb_split != NULL)
-    {
-        while (rgb_split[i])
-        {
-            free(rgb_split[i]);
-            i++;
-        }
-        free (rgb_split);
-    }
-    free (rgb);
-    return (color);
-}
-
-int     spaces_line(char *line)
-{
-    int i;
-
-    i = 0;
-    while (line[i])
-    {
-        if (line[i] != ' ' && line[i] != '\n')
-            return (0);
-        i++;
-    }
-    return (1);
-}
 
 void    map_data(t_data *data, int fd, int lines)
 {
@@ -136,25 +98,4 @@ void    parse_map(t_data *data, int fd)
         printf("%s", data->map[i]);
         i++;
     } */
-}
-
-void    parser(t_data *data, char *file)
-{
-    char    *line;
-    int     lines;
-    int     fd;
-
-    fd = open(file, O_RDONLY);
-    parse_textures(data, fd);
-    close (fd);
-    lines = data->map_start;
-    fd = open(file, O_RDONLY);
-    while (lines > 0)
-    {
-        line = get_next_line(fd);
-        free (line);
-        lines--;
-    }
-    parse_map(data, fd);
-    close (fd);
 }
