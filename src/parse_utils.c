@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:54:17 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/20 18:55:21 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/10/23 20:45:07 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,25 @@ int     spaces_line(char *line)
         i++;
     }
     return (1);
+}
+
+char    *get_path(char *line)
+{
+    char    *path;
+    int     i;
+    int     j;
+
+    i = 3;
+    j = 0;
+    path = (char *)malloc(sizeof(char) * (ft_strlen(line) - 3));
+    while(line[i] != '\n')
+    {
+        path[j] = line[i];
+        j++;
+        i++;
+    }
+    path[j] = '\0';
+    return (path);
 }
 
 t_color    get_color(char *rgb)

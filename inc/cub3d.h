@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:23:24 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/20 20:11:02 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/10/23 21:41:05 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 #define WIN_W 512
 #define WIN_H 512
+#define TILE_SIZE 30
 
 typedef struct s_color
 {
@@ -38,6 +39,14 @@ typedef struct s_player
     int      dir_y;
 }           t_player;
 
+typedef struct s_texture
+{
+    mlx_texture_t   *north;
+    mlx_texture_t   *south;
+    mlx_texture_t   *west;
+    mlx_texture_t   *east;
+}           t_texture;
+
 typedef struct s_data
 {
     char        *north;
@@ -49,20 +58,40 @@ typedef struct s_data
     int         map_start;
     int         map_lines;
     char        **map;
-    t_player    player; 
+    t_player    player;
+    t_texture   textures; 
 }           t_data;
 
+typedef struct s_screen
+{
+    mlx_t       *mlx;
+    mlx_image_t *img;
+
+}           t_screen;
+
+typedef struct s_game
+{
+    t_data      *data;
+    t_player    *player;
+    t_screen    *screen;
+}           t_game;
 
 //checker.c//
 void        set_dir(t_player player, char dir);
 int         check_player(t_data *data);
+int         check_colors(t_data *data);
 int         check_data(t_data *data);
+//hooks.c//
+void        refresh(void *param);
+//initialize.c//
+void        data_init(t_data *data);
 //main.c//
 int         check_args(int argc, char **argv);
-void        parse_and_check(t_data *data, char *file);
-int main(int argc, char **argv);
+void        parse_and_check(t_game *game, char *file);
+int         main(int argc, char **argv);
 //parser_utils//
 int         spaces_line(char *line);
+char        *get_path(char *line);
 t_color     get_color(char *rgb);
 //parser.c//
 void        map_data(t_data *data, int fd, int lines);
@@ -71,6 +100,7 @@ void        parse_textures(t_data *data, int fd);
 void        parse_map(t_data *data, int fd);
 //utils.c//
 char        *get_next_line(int fd);
+void        game_over(t_game *game);
 
 
 

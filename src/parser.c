@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 17:33:16 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/20 18:56:35 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/10/23 20:46:12 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void    parse_colors(t_data *data, int fd, int lines)
     char    *line;
 
     line = NULL;
-    data->floor.red = -1;
-    data->ceiling.red = -1;
     while (line = get_next_line(fd))
     {
         if (!ft_strncmp(line, "F ", 2))
@@ -62,13 +60,13 @@ void    parse_textures(t_data *data, int fd)
     while (line = get_next_line(fd))
     {
         if (!ft_strncmp(line, "NO ", 3))
-            data->north = ft_substr(line, 3, ft_strlen(line));
+            data->north = get_path(line);
         if (!ft_strncmp(line, "SO ", 3))
-            data->south = ft_substr(line, 3, ft_strlen(line));
+            data->south = get_path(line);
         if (!ft_strncmp(line, "WE ", 3))
-            data->west = ft_substr(line, 3, ft_strlen(line));
+            data->west = get_path(line);
         if (!ft_strncmp(line, "EA ", 3))
-            data->east = ft_substr(line, 3, ft_strlen(line));
+            data->east = get_path(line);
         free (line);
         lines++;
         if (data->north && data->south && data->west && data->east)

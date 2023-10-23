@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:29:04 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/20 20:24:41 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/10/23 22:22:42 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,15 @@ int check_args(int argc, char **argv)
     return (1);
 }
 
-void    parse_and_check(t_data *data, char *file)
+void    parse_and_check(t_game *game, char *file)
 {
+    t_data  *data;
     char    *line;
     int     lines;
     int     fd;
 
+    data = (t_data *)malloc(sizeof(t_data));
+    data_init(data);
     fd = open(file, O_RDONLY);
     parse_textures(data, fd);
     close (fd);
@@ -59,24 +62,59 @@ void    parse_and_check(t_data *data, char *file)
     parse_map(data, fd);
     close (fd);
     check_data(data);
+    game->data = data;
+}
+
+void	set_background(mlx_image_t *img)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while (x < WIN_H)
+	{
+		y = 0;
+		while (y < WIN_W)
+		{
+			mlx_put_pixel(img, y, x, 0x1f2124FF);
+			y++;
+		}
+		x++;
+	}
+}
+
+int     screen_init(t_game *game)
+{
+    game->screen->mlx = mlx_init(WIN_W, WIN_H, "cub3D", true);
+    game->screen->img = mlx_new_image(game->screen->mlx, WIN_W, WIN_H);
+    mlx_image_to_window(game->screen->mlx, game->screen->img, 0, 0);
+    mlx_loop(game->screen->mlx);
+    //set_background(game);
+    return(1);
 }
 
 int main(int argc, char **argv)
 {
-    t_data  *data;
-    // mlx_t   *mlx;
-    // mlx_image_t *img;
+    t_game      *game;
+    mlx_t       *mlx;
+    mlx_image_t *img;
 
-    data = (t_data *)malloc(sizeof(t_data));
     if (!check_args(argc, argv))
         exit(EXIT_FAILURE);
-    parse_and_check(data, argv[1]);
-
-    /* mlx = mlx_init(WIN_W, WIN_H, "Cub3D", true);
+    game = (t_game *)malloc(sizeof(t_game));
+    mlx = mlx_init(WIN_W, WIN_H, "cub3D", true);
     img = mlx_new_image(mlx, WIN_W, WIN_H);
     mlx_image_to_window(mlx, img, 0, 0);
-    mlx_put_pixel(img, data->player.x, data->player.y, 322113); */
-    
+    set_background(img);
+    mlx_loop(mlx);
+    //screen_init(game);
+    parse_and_check(game, argv[1]);
+    //mlx_loop_hook(game->mlx, refresh, &game);
+    //mlx_loop(game->screen->mlx);
+    //mlx_delete_image(game->screen->mlx, game->screen->img);
+    mlx_terminate(mlx);
+    game_over(game);
+    //free (game);
     system("leaks --q cub3d");
     return (0);
 }
