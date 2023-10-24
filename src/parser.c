@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 17:33:16 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/23 20:46:12 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/10/24 21:05:59 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,25 +75,33 @@ void    parse_textures(t_data *data, int fd)
     parse_colors(data, fd, lines);
 }
 
-void    parse_map(t_data *data, int fd)
+void    parse_map(t_data *data, int fd, t_game *game)
 {
     int     i;
+    int     len;
+    int     width;
     char    *line;
 
     i = 0;
+    width = 0;
     line = NULL;
-    data->map = (char *)malloc(sizeof(char) * data->map_lines);
+    game->map.map_h = data->map_lines;
+    game->map.map_array = (char *)malloc(sizeof(char) * data->map_lines);
     while (i < data->map_lines)
     {
         line = get_next_line(fd);
-        data->map[i] = ft_strdup(line);
+        game->map.map_array[i] = ft_strdup(line);
+        len = ft_strlen(line);
+        if (width < len)
+            width = len;
         free (line);
         i++;
     }
+    game->map.map_w = width;
     i = 0;
-    /* while (i < data->map_lines)
+    while (i < data->map_lines)
     {
-        printf("%s", data->map[i]);
+        printf("%s", game->map.map_array[i]);
         i++;
-    } */
+    }
 }

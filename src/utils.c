@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:56:19 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/23 20:48:26 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/10/24 21:12:35 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,23 @@ char *get_next_line(int fd)
     return (buffer);
 }
 
+int get_rgba(int r, int g, int b, int a)
+{
+    return (r << 24 | g << 16 | b << 8 | a);
+}
+
 void    game_over(t_game *game)
 {
     int i;
 
     i = 0;
-    while (game->data->map[i])
+    while (game->map.map_array[i])
     {
-        free (game->data->map[i]);
+        free (game->map.map_array[i]);
         i++;
     }
+    mlx_delete_texture(game->textures.north);
+    mlx_delete_texture(game->textures.south);
+    mlx_delete_texture(game->textures.west);
+    mlx_delete_texture(game->textures.east);
 }

@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:23:24 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/23 21:41:05 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/10/24 21:00:36 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 #include <math.h>
 #include <fcntl.h>
 
-#define WIN_W 512
-#define WIN_H 512
+#define WIN_W 800
+#define WIN_H 600
 #define TILE_SIZE 30
 
 typedef struct s_color
@@ -45,6 +45,8 @@ typedef struct s_texture
     mlx_texture_t   *south;
     mlx_texture_t   *west;
     mlx_texture_t   *east;
+    int             floor_color;
+    int             ceiling_color;
 }           t_texture;
 
 typedef struct s_data
@@ -57,30 +59,30 @@ typedef struct s_data
     t_color     ceiling;
     int         map_start;
     int         map_lines;
-    char        **map;
-    t_player    player;
-    t_texture   textures; 
 }           t_data;
 
-typedef struct s_screen
+typedef struct s_map
 {
-    mlx_t       *mlx;
-    mlx_image_t *img;
-
-}           t_screen;
+    char        **map_array;
+    int         map_h;
+    int         map_w;
+}           t_map;
 
 typedef struct s_game
 {
-    t_data      *data;
-    t_player    *player;
-    t_screen    *screen;
+    mlx_t       *mlx;
+    mlx_image_t *img;
+    t_map       map;
+    t_player    player;
+    t_texture   textures;
 }           t_game;
 
 //checker.c//
 void        set_dir(t_player player, char dir);
-int         check_player(t_data *data);
+int         check_player(t_game *game);
 int         check_colors(t_data *data);
-int         check_data(t_data *data);
+int         load_textures(t_data *data, t_game *game);
+int         check_data(t_data *data, t_game *game);
 //hooks.c//
 void        refresh(void *param);
 //initialize.c//
@@ -97,9 +99,10 @@ t_color     get_color(char *rgb);
 void        map_data(t_data *data, int fd, int lines);
 void        parse_colors(t_data *data, int fd, int lines);
 void        parse_textures(t_data *data, int fd);
-void        parse_map(t_data *data, int fd);
+void        parse_map(t_data *data, int fd, t_game *game);
 //utils.c//
 char        *get_next_line(int fd);
+int         get_rgba(int r, int g, int b, int a);
 void        game_over(t_game *game);
 
 

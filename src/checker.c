@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:47:24 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/23 20:46:53 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/10/24 21:11:04 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,23 @@ void    set_dir(t_player player, char dir)
 
 }
 
-int     check_player(t_data *data)
+int     check_player(t_game *game)
 {
     int   i;
     int   j;
 
     i = 0;
-    while (i < data->map_lines) 
+    while (i < game->map.map_h) 
     {
         j = 0;
-        while (data->map[i][j])
+        while (game->map.map_array[i][j])
         {
-            if (data->map[i][j] == 'N' || data->map[i][j] == 'S' || \
-                data->map[i][j] == 'W' || data->map[i][j] == 'E')
+            if (game->map.map_array[i][j] == 'N' || game->map.map_array[i][j] == 'S' || \
+                game->map.map_array[i][j] == 'W' || game->map.map_array[i][j] == 'E')
             {
-                data->player.x = j * TILE_SIZE;
-                data->player.y = i * TILE_SIZE;
-                set_dir(data->player, data->map[i][j]);
+                game->player.x = (j * TILE_SIZE) + (TILE_SIZE / 2);
+                game->player.y = (i * TILE_SIZE) + (TILE_SIZE / 2);
+                set_dir(game->player, game->map.map_array[i][j]);
                 return (1);
             }
             j++;
@@ -78,7 +78,7 @@ int     check_colors(t_data *data)
     return (1);
 }
 
-int     load_textures(t_data *data)
+int     load_textures(t_data *data, t_game *game)
 {
     t_texture   textures;
     int         fd[4];
@@ -97,27 +97,27 @@ int     load_textures(t_data *data)
     textures.south = mlx_load_png(data->south);
     textures.west = mlx_load_png(data->west);
     textures.east = mlx_load_png(data->east);
-    data->textures = textures;
+    game->textures = textures;
     return (1);
 }
 
-int     check_data(t_data *data)
+int     check_data(t_data *data, t_game *game)
 {
     if (!data->north || !data->south || !data->west || !data->east)
     {
         ft_putendl_fd("Error: missing wall texture.", 2);
-        return (0);
+        exit (EXIT_FAILURE);
     }
-    if (!load_textures(data) || !check_colors(data))
-        return (0);
-    if (!data->map[0])
+    if (!load_textures(data, game) || !check_colors(data))
+        exit (EXIT_FAILURE);
+    if (!game->map.map_array[0])
     {
         ft_putendl_fd("Error: invalid map.", 2);
-        return (0);
+        exit (EXIT_FAILURE);
     }
-    if (!check_player(data))
+    if (!check_player(game))
     {
         ft_putendl_fd("Error: missing player start point.", 2);
-        return (0);
+        exit (EXIT_FAILURE);
     }
 }
