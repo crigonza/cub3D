@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:23:24 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/24 21:00:36 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/10/29 12:49:00 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@
 #define WIN_H 600
 #define TILE_SIZE 30
 
+typedef struct s_point
+{
+    int     x;
+    int     y;
+}           t_point;
+
 typedef struct s_color
 {
     int     red;
@@ -33,10 +39,14 @@ typedef struct s_color
 
 typedef struct s_player
 {
-    int      x;
-    int      y;
-    int      dir_x;
-    int      dir_y;
+    double      pos_x;
+    double      pos_y;
+    double      dir_x;
+    double      dir_y;
+    double      plane_x;
+    double      plane_y;
+    double      speed;
+    double      rotate_speed;
 }           t_player;
 
 typedef struct s_texture
@@ -48,6 +58,24 @@ typedef struct s_texture
     int             floor_color;
     int             ceiling_color;
 }           t_texture;
+
+typedef struct s_ray
+{
+    double      camera;
+    double      ray_x;
+    double      ray_y;
+    double      side_dist_x;
+    double      side_dist_y;
+    double      delta_dist_x;
+    double      delta_dist_y;
+    double      wall_dist;
+    int         map_x;
+    int         map_y;
+    int         step_x;
+    int         step_y;
+    int         wall_hit;
+    int         side_hit;
+}           t_ray;
 
 typedef struct s_data
 {
@@ -75,14 +103,22 @@ typedef struct s_game
     t_map       map;
     t_player    player;
     t_texture   textures;
+    t_ray       raycast;
 }           t_game;
 
+//check_map//
+int         check_first_and_last(char *first, char *last);
+int         check_map_point(char **map, int y, int x);
+int         check_map(t_map map);
 //checker.c//
 void        set_dir(t_player player, char dir);
 int         check_player(t_game *game);
 int         check_colors(t_data *data);
 int         load_textures(t_data *data, t_game *game);
 int         check_data(t_data *data, t_game *game);
+//free_utils//
+void        game_over(t_game *game);
+void        free_data(t_data *data);
 //hooks.c//
 void        refresh(void *param);
 //initialize.c//
@@ -100,10 +136,11 @@ void        map_data(t_data *data, int fd, int lines);
 void        parse_colors(t_data *data, int fd, int lines);
 void        parse_textures(t_data *data, int fd);
 void        parse_map(t_data *data, int fd, t_game *game);
+//raycast.c//
+void        raycast(t_game *game);
 //utils.c//
 char        *get_next_line(int fd);
 int         get_rgba(int r, int g, int b, int a);
-void        game_over(t_game *game);
 
 
 

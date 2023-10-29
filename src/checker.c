@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:47:24 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/24 21:11:04 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/10/29 12:46:09 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,13 @@ int     check_player(t_game *game)
             if (game->map.map_array[i][j] == 'N' || game->map.map_array[i][j] == 'S' || \
                 game->map.map_array[i][j] == 'W' || game->map.map_array[i][j] == 'E')
             {
-                game->player.x = (j * TILE_SIZE) + (TILE_SIZE / 2);
-                game->player.y = (i * TILE_SIZE) + (TILE_SIZE / 2);
+                game->player.pos_x = j;
+                game->player.pos_y = i;
                 set_dir(game->player, game->map.map_array[i][j]);
+                game->player.plane_x = 0;
+                game->player.plane_y = 0.66;
+                game->player.speed = 0.5;
+                game->player.rotate_speed = 0.5;
                 return (1);
             }
             j++;
@@ -62,6 +66,7 @@ int     check_player(t_game *game)
     }
     return (0);
 }
+
 int     check_colors(t_data *data)
 {
     if (data->floor.red > 255 || data->floor.green > 255 || data->floor.blue > 255 || \
@@ -120,4 +125,10 @@ int     check_data(t_data *data, t_game *game)
         ft_putendl_fd("Error: missing player start point.", 2);
         exit (EXIT_FAILURE);
     }
+    if (!check_map(game->map))
+    {
+        ft_putendl_fd("Error: map wall is not closed.", 2);
+        return (0);
+    }
+    return (1);
 }
