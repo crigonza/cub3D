@@ -12,15 +12,16 @@
 
 #include "../inc/cub3d.h"
 
-void    refresh(void *param)
+void    key_hook(mlx_key_data_t keydata, t_game *game)
 {
-    t_game      *game;
-
-    game = (t_game *)param;
-    /* if (game->img)
-        mlx_delete_image(game->mlx, game->img); */
-    game->img = mlx_new_image(game->mlx, WIN_W, WIN_H);
-    mlx_image_to_window(game->mlx, game->img, 0, 0);
-    raycast(game);
-    //mlx_loop(game->mlx);
+    if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+        mlx_close_window(game->mlx);
+    if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
+        rotate_left(&game->player);
+    if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
+        rotate_right(&game->player);
+    if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
+        move_fordward(game);
+    if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
+        move_backward(game);
 }

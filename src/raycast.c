@@ -17,11 +17,11 @@ void    ray_refresh(t_ray *ray, t_player *player, int x)
     ray->camera = 2 * x / (double)WIN_W - 1;
     ray->ray_x = player->dir_x + player->plane_x * ray->camera;
     ray->ray_y = player->dir_y + player->plane_y * ray->camera;
+    ray->map_x = (int)player->pos_x;
+    ray->map_y = (int)player->pos_y;
     ray->wall_hit = 0;
     ray->delta_dist_x = fabs(1 / ray->ray_x);
     ray->delta_dist_y = fabs(1 / ray->ray_y);
-    ray->map_x =(int)player->pos_x;
-    ray->map_y =(int)player->pos_y;
 }
 
 void    ray_dir(t_ray *ray, t_player *player)
@@ -64,7 +64,9 @@ void    check_hit(t_game *game)
             game->raycast.map_y += game->raycast.step_y;
             game->raycast.side_hit = 1;
         }
-        if (game->map.map_array[game->raycast.map_x][game->raycast.map_y] == '1')
+        if ((game->raycast.map_x >= 0 && game->raycast.map_x < game->map.map_w &&
+            game->raycast.map_y >= 0 && game->raycast.map_y < game->map.map_h &&
+            game->map.map_array[game->raycast.map_y][game->raycast.map_x] == '1'))
             game->raycast.wall_hit = 1;
     }
 }
@@ -105,9 +107,9 @@ void    raycast(t_game *game)
     int x;
 
     x = 0;
+    ray_refresh(&game->raycast, &game->player, x);
     while (x < WIN_W)
     {
-        ray_refresh(&game->raycast, &game->player, x);
         ray_dir(&game->raycast, &game->player);
         check_hit(game);
         if (game->raycast.side_hit == 0)

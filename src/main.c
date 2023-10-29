@@ -41,17 +41,17 @@ int check_args(int argc, char **argv)
 
 void    parse_and_check(t_game *game, char *file)
 {
-    t_data  *data;
+    t_data  data;
     char    *line;
     int     lines;
     int     fd;
 
-    data = (t_data *)malloc(sizeof(t_data));
-    data_init(data);
+    //data = (t_data *)malloc(sizeof(t_data));
+    data_init(&data);
     fd = open(file, O_RDONLY);
-    parse_textures(data, fd);
+    parse_textures(&data, fd);
     close (fd);
-    lines = data->map_start;
+    lines = data.map_start;
     fd = open(file, O_RDONLY);
     while (lines > 0)
     {
@@ -59,11 +59,11 @@ void    parse_and_check(t_game *game, char *file)
         free (line);
         lines--;
     }
-    parse_map(data, fd, game);
+    parse_map(&data, fd, game);
     close (fd);
-    check_data(data, game);
-    free_data(data);
-    free (data);
+    check_data(&data, game);
+    free_data(&data);
+    //free (data);
 }
 
 void	set_background(mlx_image_t *img)
@@ -100,11 +100,16 @@ int main(int argc, char **argv)
 
     if (!check_args(argc, argv))
         exit(EXIT_FAILURE);
-    game.mlx = mlx_init(WIN_W, WIN_H, "cub3D", true);
-    //game = (t_game *)malloc(sizeof(t_game));
     parse_and_check(&game, argv[1]);
+    game.mlx = mlx_init(WIN_W, WIN_H, "cub3D", true);
+    game.img = mlx_new_image(game.mlx, WIN_W, WIN_H);
+    mlx_image_to_window(game.mlx, game.img, 0, 0);
+    //raycast(&game);
+    //game = (t_game *)malloc(sizeof(t_game));
     //screen_init(&game);
-    mlx_loop_hook(game.mlx, refresh, &game);
+    mlx_loop_hook(game.mlx, raycast, &game);
+    mlx_key_hook(game.mlx, &key_hook, &game);
+    mlx_loop(game.mlx);
     //mlx_loop(game->screen->mlx);
     //mlx_terminate(game->mlx);
     //free (game);

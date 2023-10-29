@@ -17,7 +17,7 @@ void    game_over(t_game *game)
     int i;
 
     i = 0;
-    while (game->map.map_array[i])
+    while (i < game->map.map_h)
     {
         free (game->map.map_array[i]);
         i++;

@@ -116,11 +116,16 @@ int         check_player(t_game *game);
 int         check_colors(t_data *data);
 int         load_textures(t_data *data, t_game *game);
 int         check_data(t_data *data, t_game *game);
+//controls.c//
+void        move_fordward(t_game *game);
+void        move_backward(t_game *game);
+void        rotate_left(t_player *player);
+void        rotate_right(t_player *player);
 //free_utils//
 void        game_over(t_game *game);
 void        free_data(t_data *data);
 //hooks.c//
-void        refresh(void *param);
+void        key_hook(mlx_key_data_t keydata, t_game *game);
 //initialize.c//
 void        data_init(t_data *data);
 //main.c//
