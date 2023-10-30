@@ -22,8 +22,6 @@
 
 #define WIN_W 800
 #define WIN_H 600
-#define MAX_DISTANCE 1000
-#define SCALE_FACTOR 1.5;
 
 typedef struct s_point
 {
@@ -106,6 +104,7 @@ typedef struct s_game
     t_texture   textures;
     t_ray       raycast;
 }           t_game;
+
 
 //check_map//
 int         check_first_and_last(char *first, char *last);

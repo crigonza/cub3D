@@ -84,16 +84,6 @@ void	set_background(mlx_image_t *img)
 	}
 }
 
-/* int     screen_init(t_game *game)
-{
-    game->mlx = mlx_init(WIN_W, WIN_H, "cub3D", true);
-    game->img = mlx_new_image(game->mlx, WIN_W, WIN_H);
-    mlx_image_to_window(game->mlx, game->img, 0, 0);
-    //set_background(game->img);
-    //mlx_loop(game->mlx);
-    //mlx_delete_image(game->mlx, game->img);
-} */
-
 int main(int argc, char **argv)
 {
     t_game      game;
@@ -106,14 +96,10 @@ int main(int argc, char **argv)
     mlx_image_to_window(game.mlx, game.img, 0, 0);
     //raycast(&game);
     //game = (t_game *)malloc(sizeof(t_game));
-    //screen_init(&game);
     mlx_loop_hook(game.mlx, raycast, &game);
     mlx_key_hook(game.mlx, &key_hook, &game);
     mlx_loop(game.mlx);
-    //mlx_loop(game->screen->mlx);
-    //mlx_terminate(game->mlx);
-    //free (game);
-    //game_over(&game);
-    //system("leaks --q cub3d");
+    game_over(&game);
+    system("leaks --q cub3d");
     return (0);
 }

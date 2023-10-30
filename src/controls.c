@@ -11,14 +11,6 @@ void move_forward(t_game *game)
         game->player.pos_x = newPosX;
     if (game->map.map_array[(int)newPosY][(int)game->player.pos_x] != '1')
         game->player.pos_y = newPosY;
-    /* if (game->map.map_array[(int)(game->player.pos_y + game->player.dir_y * game->player.speed)]\
-            [(int)(game->player.pos_x)] != '1')
-    {
-        game->player.pos_x += game->player.dir_x * game->player.speed;
-    }
-    if (game->map.map_array[(int)(game->player.pos_y)][(int)(game->player.pos_x + \
-            game->player.dir_x * game->player.speed)] != '1')
-        game->player.pos_y += game->player.dir_y * game->player.speed; */
 }
 
 void move_backward(t_game *game)
@@ -32,12 +24,6 @@ void move_backward(t_game *game)
         game->player.pos_x = newPosX;
     if (game->map.map_array[(int)newPosY][(int)game->player.pos_x] != '1')
         game->player.pos_y = newPosY;
-    /* if (game->map.map_array[(int)(game->player.pos_y - game->player.dir_y * game->player.speed)]\
-            [(int)(game->player.pos_x)] != '1')
-        game->player.pos_x -= game->player.dir_x * game->player.speed;
-    if (game->map.map_array[(int)(game->player.pos_y)][(int)(game->player.pos_x - \
-            game->player.dir_x * game->player.speed)] != '1')
-        game->player.pos_y -= game->player.dir_y * game->player.speed; */
 }
 
 void rotate_right(t_player *player)

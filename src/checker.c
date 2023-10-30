@@ -58,8 +58,8 @@ int     check_player(t_game *game)
                 game->player.dir_y = 1;
                 game->player.plane_x = -0.66;
                 game->player.plane_y = 0;
-                game->player.speed = 0.2;
-                game->player.rotate_speed = 0.2;
+                game->player.speed = 0.1;
+                game->player.rotate_speed = 0.1;
                 return (1);
             }
             j++;
