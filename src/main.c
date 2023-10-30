@@ -113,7 +113,7 @@ int main(int argc, char **argv)
     //mlx_loop(game->screen->mlx);
     //mlx_terminate(game->mlx);
     //free (game);
-    game_over(&game);
+    //game_over(&game);
     //system("leaks --q cub3d");
     return (0);
 }

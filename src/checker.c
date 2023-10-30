@@ -53,11 +53,13 @@ int     check_player(t_game *game)
             {
                 game->player.pos_x = j;
                 game->player.pos_y = i;
-                set_dir(game->player, game->map.map_array[i][j]);
-                game->player.plane_x = 0;
-                game->player.plane_y = 0.66;
-                game->player.speed = 0.5;
-                game->player.rotate_speed = 0.5;
+                //set_dir(game->player, game->map.map_array[i][j]);
+                game->player.dir_x = 0;
+                game->player.dir_y = 1;
+                game->player.plane_x = -0.66;
+                game->player.plane_y = 0;
+                game->player.speed = 0.2;
+                game->player.rotate_speed = 0.2;
                 return (1);
             }
             j++;
@@ -125,10 +127,10 @@ int     check_data(t_data *data, t_game *game)
         ft_putendl_fd("Error: missing player start point.", 2);
         exit (EXIT_FAILURE);
     }
-    if (!check_map(game->map))
+    /* if (!check_map(game->map))
     {
         ft_putendl_fd("Error: map wall is not closed.", 2);
         return (0);
-    }
+    } */
     return (1);
 }

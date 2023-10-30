@@ -21,7 +21,7 @@ void    key_hook(mlx_key_data_t keydata, t_game *game)
     if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
         rotate_right(&game->player);
     if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-        move_fordward(game);
+        move_forward(game);
     if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
         move_backward(game);
 }
