@@ -54,8 +54,8 @@ t_color    get_color(char *rgb)
     i = 0;
     rgb_split = ft_split(rgb, ',');
     color.red = ft_atoi(rgb_split[0]);
-    color.blue = ft_atoi(rgb_split[1]);
-    color.green = ft_atoi(rgb_split[2]);
+    color.green = ft_atoi(rgb_split[1]);
+    color.blue = ft_atoi(rgb_split[2]);
     if (rgb_split != NULL)
     {
         while (rgb_split[i])

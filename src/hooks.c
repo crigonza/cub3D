@@ -12,8 +12,11 @@
 
 #include "../inc/cub3d.h"
 
-void    key_hook(mlx_key_data_t keydata, t_game *game)
+void    key_hook(mlx_key_data_t keydata, void *params)
 {
+    t_game  *game;
+
+    game = params;
     if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
         mlx_close_window(game->mlx);
     if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
@@ -24,4 +27,12 @@ void    key_hook(mlx_key_data_t keydata, t_game *game)
         move_forward(game);
     if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
         move_backward(game);
+}
+
+void    main_hook(void *params)
+{
+    t_game  *game;
+
+    game = (t_game*)params;
+    raycast(game);
 }

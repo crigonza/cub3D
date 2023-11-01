@@ -57,6 +57,10 @@ typedef struct s_texture
     mlx_texture_t   *east;
     int             floor_color;
     int             ceiling_color;
+    int             tex_x;
+    int             tex_y;
+    double             tex_step;
+    double             tex_pos;
 }           t_texture;
 
 typedef struct s_ray
@@ -69,11 +73,12 @@ typedef struct s_ray
     double      delta_dist_x;
     double      delta_dist_y;
     double      wall_dist;
+    double      wall_x;
     int         map_x;
     int         map_y;
     int         step_x;
     int         step_y;
-    int         wall_hit;
+    int         hit;
     int         side_hit;
 }           t_ray;
 
@@ -112,9 +117,9 @@ int         check_first_and_last(char *first, char *last);
 int         check_map_point(char **map, int y, int x);
 int         check_map(t_map map);
 //checker.c//
-void        set_dir(t_player player, char dir);
+void        set_dir(t_player *player, char dir);
 int         check_player(t_game *game);
-int         check_colors(t_data *data);
+int         check_colors(t_data *data, t_game *game);
 int         load_textures(t_data *data, t_game *game);
 int         check_data(t_data *data, t_game *game);
 //controls.c//
@@ -126,7 +131,8 @@ void        rotate_right(t_player *player);
 void        game_over(t_game *game);
 void        free_data(t_data *data);
 //hooks.c//
-void        key_hook(mlx_key_data_t keydata, t_game *game);
+void        key_hook(mlx_key_data_t keydata, void *params);
+void        main_hook(void *params);
 //initialize.c//
 void        data_init(t_data *data);
 //main.c//

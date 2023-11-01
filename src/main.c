@@ -46,7 +46,6 @@ void    parse_and_check(t_game *game, char *file)
     int     lines;
     int     fd;
 
-    //data = (t_data *)malloc(sizeof(t_data));
     data_init(&data);
     fd = open(file, O_RDONLY);
     parse_textures(&data, fd);
@@ -61,9 +60,12 @@ void    parse_and_check(t_game *game, char *file)
     }
     parse_map(&data, fd, game);
     close (fd);
-    check_data(&data, game);
+    if(!check_data(&data, game))
+    {
+        free_data(&data);
+        exit (EXIT_FAILURE);
+    }
     free_data(&data);
-    //free (data);
 }
 
 void	set_background(mlx_image_t *img)
@@ -94,12 +96,12 @@ int main(int argc, char **argv)
     game.mlx = mlx_init(WIN_W, WIN_H, "cub3D", true);
     game.img = mlx_new_image(game.mlx, WIN_W, WIN_H);
     mlx_image_to_window(game.mlx, game.img, 0, 0);
-    //raycast(&game);
-    //game = (t_game *)malloc(sizeof(t_game));
-    mlx_loop_hook(game.mlx, raycast, &game);
-    mlx_key_hook(game.mlx, &key_hook, &game);
+    mlx_loop_hook(game.mlx, main_hook, &game);
+    mlx_key_hook(game.mlx, key_hook, &game);
     mlx_loop(game.mlx);
-    game_over(&game);
+    //game_over(&game);
+    mlx_delete_image(game.mlx, game.img);
+    mlx_terminate(game.mlx);
     system("leaks --q cub3d");
     return (0);
 }

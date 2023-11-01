@@ -12,29 +12,53 @@
 
 # include "../inc/cub3d.h"
 
-void    set_dir(t_player player, char dir)
+void    set_plane(t_player *player, char dir)
 {
     if (dir == 'N')
     {
-        player.dir_x = 0;
-        player.dir_y = -1;
+        player->plane_x = 0.66;
+        player->plane_y = 0;
     }
     else if (dir == 'S')
     {
-        player.dir_x = 0;
-        player.dir_y = 1;
+        player->plane_x = -0.66;
+        player->plane_y = 0;
     }
     else if (dir == 'W')
     {
-        player.dir_x = -1;
-        player.dir_y = 0;
+        player->plane_x = 0;
+        player->plane_y = -0.66;
     }
     else if (dir == 'E')
     {
-        player.dir_x = 1;
-        player.dir_y = 0;
+        player->plane_x = 0;
+        player->plane_y = 0.66;
     }
+}
 
+void    set_dir(t_player *player, char dir)
+{
+    if (dir == 'N')
+    {
+        player->dir_x = 0;
+        player->dir_y = -1;
+    }
+    else if (dir == 'S')
+    {
+        player->dir_x = 0;
+        player->dir_y = 1;
+    }
+    else if (dir == 'W')
+    {
+        player->dir_x = -1;
+        player->dir_y = 0;
+    }
+    else if (dir == 'E')
+    {
+        player->dir_x = 1;
+        player->dir_y = 0;
+    }
+    set_plane(player, dir);
 }
 
 int     check_player(t_game *game)
@@ -53,11 +77,7 @@ int     check_player(t_game *game)
             {
                 game->player.pos_x = j;
                 game->player.pos_y = i;
-                //set_dir(game->player, game->map.map_array[i][j]);
-                game->player.dir_x = 0;
-                game->player.dir_y = 1;
-                game->player.plane_x = -0.66;
-                game->player.plane_y = 0;
+                set_dir(&game->player, game->map.map_array[i][j]);
                 game->player.speed = 0.1;
                 game->player.rotate_speed = 0.1;
                 return (1);
@@ -69,7 +89,7 @@ int     check_player(t_game *game)
     return (0);
 }
 
-int     check_colors(t_data *data)
+int     check_colors(t_data *data, t_game *game)
 {
     if (data->floor.red > 255 || data->floor.green > 255 || data->floor.blue > 255 || \
         data->ceiling.red > 255 || data->ceiling.green > 255 || data->ceiling.blue > 255)
@@ -82,6 +102,8 @@ int     check_colors(t_data *data)
         ft_putendl_fd("Error: missing floor or ceiling color.", 2);
         return (0);
     }
+    game->textures.ceiling_color = get_rgba(data->ceiling.red, data->ceiling.green, data->ceiling.blue, 0xFF);
+    game->textures.floor_color = get_rgba(data->floor.red, data->floor.green, data->floor.blue, 0xFF);
     return (1);
 }
 
@@ -99,7 +121,10 @@ int     load_textures(t_data *data, t_game *game)
         ft_putendl_fd("Error: cant open texture file.", 2);
         return (0);
     }
-    close (fd); 
+    close (fd[0]); 
+    close (fd[1]); 
+    close (fd[2]); 
+    close (fd[3]); 
     textures.north = mlx_load_png(data->north);
     textures.south = mlx_load_png(data->south);
     textures.west = mlx_load_png(data->west);
@@ -113,19 +138,19 @@ int     check_data(t_data *data, t_game *game)
     if (!data->north || !data->south || !data->west || !data->east)
     {
         ft_putendl_fd("Error: missing wall texture.", 2);
-        exit (EXIT_FAILURE);
+        return (0);
     }
-    if (!load_textures(data, game) || !check_colors(data))
-        exit (EXIT_FAILURE);
+    if (!load_textures(data, game) || !check_colors(data, game))
+        return (0);
     if (!game->map.map_array[0])
     {
         ft_putendl_fd("Error: invalid map.", 2);
-        exit (EXIT_FAILURE);
+        return (0);
     }
     if (!check_player(game))
     {
         ft_putendl_fd("Error: missing player start point.", 2);
-        exit (EXIT_FAILURE);
+        return (0);
     }
     /* if (!check_map(game->map))
     {
