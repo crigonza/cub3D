@@ -65,8 +65,11 @@ void    check_hit(t_game *game)
             game->raycast.map_y += game->raycast.step_y;
             game->raycast.side_hit = 1;
         }
-        if (game->map.map_array[game->raycast.map_y][game->raycast.map_x] > '0')
-            game->raycast.wall_hit = 1;
+        if (game->raycast.map_x < WIN_W && game->raycast.map_y < WIN_H)
+        {
+            if (game->map.map_array[game->raycast.map_y][game->raycast.map_x] == '1')
+                game->raycast.wall_hit = 1;
+        }
     }
 }
 
@@ -87,6 +90,22 @@ void draw_sky_and_floor(t_game *game, int x)
     }
 }
 
+int     get_texture_pixel(mlx_texture_t *texture, int x, int y)
+{
+    int         rgba;
+    t_color     color;
+    uint8_t     *pixel;
+    
+    if (y > texture->height)
+        y = y % texture->height;
+    pixel = texture->pixels + (y *texture->width + x) * texture->bytes_per_pixel;
+    color.red = pixel[0];
+    color.green = pixel[0];
+    color.blue = pixel[0];
+    color.alpha = pixel[0];
+    rgba = get_rgba(color.red, color.green, color.blue, color.alpha);
+}
+
 void    draw_stripe(t_game *game, int x, int start, int end, int color)
 {
     int y;
@@ -94,6 +113,7 @@ void    draw_stripe(t_game *game, int x, int start, int end, int color)
     y = start;
     while (y <= end)
     {
+        color = get_texture_pixel(game->textures.north, x, y);
         mlx_put_pixel(game->img, x, y, color);
         y++;
     }
