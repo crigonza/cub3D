@@ -99,9 +99,9 @@ int main(int argc, char **argv)
     mlx_loop_hook(game.mlx, main_hook, &game);
     mlx_key_hook(game.mlx, key_hook, &game);
     mlx_loop(game.mlx);
-    //game_over(&game);
+    game_over(&game);
     mlx_delete_image(game.mlx, game.img);
     mlx_terminate(game.mlx);
-    system("leaks --q cub3d");
+    // system("leaks --q cub3d");
     return (0);
 }

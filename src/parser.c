@@ -32,8 +32,8 @@ void    map_data(t_data *data, int fd, int lines)
     free (line);
     data->map_lines = map_len;
     data->map_start = lines;
-    // printf("map start = %d\n", data->map_start);
-    // printf("map lines = %d\n", data->map_lines);
+    /* printf("map start = %d\n", data->map_start);
+    printf("map lines = %d\n", data->map_lines); */
 }
 
 void    parse_colors(t_data *data, int fd, int lines)
@@ -97,7 +97,7 @@ void    parse_map(t_data *data, int fd, t_game *game)
     width = 0;
     line = NULL;
     game->map.map_h = data->map_lines;
-    game->map.map_array = (char **)malloc(sizeof(char) * data->map_lines);
+    game->map.map_array = (char **)malloc(sizeof(char *) * data->map_lines);
     while (i < data->map_lines)
     {
         line = get_next_line(fd);
@@ -108,7 +108,9 @@ void    parse_map(t_data *data, int fd, t_game *game)
         free (line);
         i++;
     }
-    /* game->map.map_w = width;
+    game->map.map_w = width;
+    /* printf ("ANCHO DEL MAPA : %d\n", game->map.map_w);
+    printf ("ALTO DEL MAPA : %d\n", game->map.map_h);
     i = 0;
     while (i < data->map_lines)
     {
