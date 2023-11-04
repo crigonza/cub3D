@@ -98,6 +98,7 @@ int main(int argc, char **argv)
     mlx_image_to_window(game.mlx, game.img, 0, 0);
     mlx_loop_hook(game.mlx, main_hook, &game);
     mlx_key_hook(game.mlx, key_hook, &game);
+    mlx_mouse_hook(game.mlx, my_mouse_hook, &game);
     mlx_loop(game.mlx);
     game_over(&game);
     mlx_delete_image(game.mlx, game.img);

@@ -33,6 +33,27 @@ void    key_hook(mlx_key_data_t keydata, void *params)
         rotate_right(&game->player);
 }
 
+void    my_mouse_hook(double pos_x, double pos_y, void *params)
+{
+    t_game  *game;
+
+    game = params;
+    (void)pos_y;
+    if (pos_x > WIN_W / 2 + 25)
+    {
+		game->player.rotate_speed = .05;
+        rotate_right(&game->player);
+    }
+	else if (pos_x < WIN_W / 2 - 25)
+	{
+        game->player.rotate_speed = .05;
+        rotate_left(&game->player);
+    }
+	if (pos_x > WIN_W / 2 + 25 || pos_x < WIN_W / 2 - 25
+		|| pos_y > WIN_H / 2 + 25 || pos_y < WIN_H - 25)
+		mlx_set_mouse_pos(game->mlx, WIN_W / 2, WIN_H / 2);
+}
+
 void    main_hook(void *params)
 {
     t_game  *game;
