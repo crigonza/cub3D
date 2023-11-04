@@ -20,13 +20,17 @@ void    key_hook(mlx_key_data_t keydata, void *params)
     if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
         mlx_close_window(game->mlx);
     if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
-        rotate_left(&game->player);
+        move_left(game);
     if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
-        rotate_right(&game->player);
+        move_right(game);
     if (keydata.key == MLX_KEY_W && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
         move_forward(game);
     if (keydata.key == MLX_KEY_S && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
         move_backward(game);
+    if (keydata.key == MLX_KEY_LEFT && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+        rotate_left(&game->player);
+    if (keydata.key == MLX_KEY_RIGHT && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+        rotate_right(&game->player);
 }
 
 void    main_hook(void *params)
