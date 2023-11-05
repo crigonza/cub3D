@@ -96,6 +96,7 @@ int main(int argc, char **argv)
     game.mlx = mlx_init(WIN_W, WIN_H, "cub3D", true);
     game.img = mlx_new_image(game.mlx, WIN_W, WIN_H);
     mlx_image_to_window(game.mlx, game.img, 0, 0);
+    mlx_set_mouse_pos(game.mlx, WIN_H / 2, WIN_W / 2);
     mlx_loop_hook(game.mlx, main_hook, &game);
     mlx_key_hook(game.mlx, key_hook, &game);
     mlx_mouse_hook(game.mlx, my_mouse_hook, &game);

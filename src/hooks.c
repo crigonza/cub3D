@@ -39,19 +39,17 @@ void    my_mouse_hook(double pos_x, double pos_y, void *params)
 
     game = params;
     (void)pos_y;
-    if (pos_x > WIN_W / 2 + 25)
+    if (pos_x > WIN_W / 1.5)
     {
 		game->player.rotate_speed = .05;
         rotate_right(&game->player);
+        mlx_set_mouse_pos(game->mlx, WIN_H / 2, WIN_W / 2);
     }
-	else if (pos_x < WIN_W / 2 - 25)
+	else if (pos_x < WIN_W / 4)
 	{
         game->player.rotate_speed = .05;
-        rotate_left(&game->player);
+        mlx_set_mouse_pos(game->mlx, WIN_H / 2, WIN_W / 2);
     }
-	if (pos_x > WIN_W / 2 + 25 || pos_x < WIN_W / 2 - 25
-		|| pos_y > WIN_H / 2 + 25 || pos_y < WIN_H - 25)
-		mlx_set_mouse_pos(game->mlx, WIN_W / 2, WIN_H / 2);
 }
 
 void    main_hook(void *params)
@@ -60,4 +58,5 @@ void    main_hook(void *params)
 
     game = (t_game*)params;
     raycast(game);
+    minimap_squares(game);
 }
