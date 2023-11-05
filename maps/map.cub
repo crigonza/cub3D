@@ -1,9 +1,9 @@
-NO ./textures/wall1.png
-SO ./textures/wall1.png
-WE ./textures/wall1.png
-EA ./textures/wall1.png
-F 43,35,45
-C 80,100,150
+NO ./textures/wall42.png
+SO ./textures/wall_up2u.png
+WE ./textures/wall_coal.png
+EA ./textures/wall_taq.png
+F 45,54,70
+C 20,20,20
 
 
         1111111111111111111111111

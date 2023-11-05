@@ -114,6 +114,11 @@ t_color     get_texture_pixel(mlx_texture_t *texture, int x, int y)
 
 void    set_tex_params(t_texture *texture, mlx_texture_t *tex, t_ray *ray)
 {
+    if (tex->height <= tex->width / 2)
+    {
+        ray->wall_x /= 2;
+        ray->wall_x -= floor(ray->wall_x);
+    }
     if (ray->side_hit == 0 && ray->ray_x > 0)
         texture->tex_x = tex->width - (int)(ray->wall_x * (double)(tex->width)) - 1;
     else if (ray->side_hit == 0 && ray->ray_y < 0)
@@ -206,7 +211,7 @@ void    raycast(t_game *game)
                 (1 - game->raycast.step_y) / 2) / game->raycast.ray_y);
             game->raycast.wall_x = game->player.pos_x + game->raycast.wall_dist * game->raycast.ray_x;
         }
-        game->raycast.wall_x -= floor(game->raycast.wall_x);
+        //game->raycast.wall_x -= floor(game->raycast.wall_x);
         // printf("wall_x : %f ||| ", game->raycast.wall_x);
         draw_sky_and_floor(game, x);
         get_wall_height(game, x);
