@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 11:16:15 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/29 12:45:54 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/05 18:11:51 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,21 +112,32 @@ t_color     get_texture_pixel(mlx_texture_t *texture, int x, int y)
     return (color);
 }
 
-void    set_tex_params(t_texture *texture, mlx_texture_t *tex, t_ray *ray)
+void    set_tex_params(t_wall_tex *wall_tex, t_ray *ray)
 {
-    if (tex->height <= tex->width / 2)
+    if (wall_tex->tex->height == wall_tex->tex->width / 2)
     {
         ray->wall_x /= 2;
         ray->wall_x -= floor(ray->wall_x);
     }
-    if (ray->side_hit == 0 && ray->ray_x > 0)
-        texture->tex_x = tex->width - (int)(ray->wall_x * (double)(tex->width)) - 1;
-    else if (ray->side_hit == 0 && ray->ray_y < 0)
-        texture->tex_x = tex->width - (int)(ray->wall_x * (double)(tex->width)) - 1;
+    else if (wall_tex->tex->height == wall_tex->tex->width / 3)
+    {
+        ray->wall_x /= 3;
+        ray->wall_x -= floor(ray->wall_x);
+    }
+    if (ray->side_hit == 0)
+    {
+        if (ray->step_x > 0)
+            wall_tex->tex_x = (int)(ray->wall_x * (double)(wall_tex->tex->width));
+        else
+            wall_tex->tex_x = wall_tex->tex->width - (int)(ray->wall_x * (double)(wall_tex->tex->width)) - 1;
+    }
     else
-        texture->tex_x = (int)(ray->wall_x * (double)(tex->width));
-    // printf("tex x: %d", texture->tex_x);
-    
+    {
+        if (ray->step_y > 0)
+            wall_tex->tex_x = wall_tex->tex->width - (int)(ray->wall_x * (double)(wall_tex->tex->width)) - 1;
+        else
+            wall_tex->tex_x = (int)(ray->wall_x * (double)(wall_tex->tex->width));
+    }
 }
 
 int     dim_color(t_color *color, double dist)
@@ -146,22 +157,39 @@ int     dim_color(t_color *color, double dist)
     return (new_color);
 }
 
+void    get_wall_texture(t_game * game)
+{
+    if (game->raycast.side_hit == 0)
+    {
+        if (game->raycast.ray_x > 0)
+            game->wall_tex.tex = game->textures.west;
+        else
+            game->wall_tex.tex = game->textures.east;
+    }
+    else
+    {
+        if (game->raycast.ray_y > 0)
+            game->wall_tex.tex = game->textures.north;
+        else
+            game->wall_tex.tex = game->textures.south;
+    }
+}
+
+
 void    draw_stripe(t_game *game, int x, int start, int end)
 {
-    int         y;
-    int         dimmed_color;
-    t_color     color;
+    int             y;
+    int             dimmed_color;
+    t_color         color;
 
     y = start;
-    set_tex_params(&game->textures, game->textures.north, &game->raycast);
+    get_wall_texture(game);
+    set_tex_params(&game->wall_tex, &game->raycast);
     while (y <= end)
     {
-        game->textures.tex_y = ((int)game->textures.tex_pos) % game->textures.north->height;
-        game->textures.tex_pos += game->textures.tex_step;
-        // printf("tex_pos : %f", game->textures.tex_pos);
-        // printf("tex x: %d || ", game->textures.tex_x);
-        // printf("tex y: %d\n", game->textures.tex_y);
-        color = get_texture_pixel(game->textures.north, game->textures.tex_x, game->textures.tex_y);
+        game->wall_tex.tex_y = ((int)game->wall_tex.tex_pos) % game->wall_tex.tex->height;
+        game->wall_tex.tex_pos += game->wall_tex.tex_step;
+        color = get_texture_pixel(game->wall_tex.tex, game->wall_tex.tex_x, game->wall_tex.tex_y);
         dimmed_color = dim_color(&color, game->raycast.wall_dist);
         mlx_put_pixel(game->img, x, y, dimmed_color);
         y++;
@@ -183,8 +211,8 @@ void    get_wall_height(t_game *game, int x)
         wall_end = WIN_H - 1;
     /* if (game->raycast.side_hit == 1)
         color = color / 2; */
-    game->textures.tex_step = 1.0 * game->textures.north->height / line_h;
-    game->textures.tex_pos = (wall_start - WIN_H / 2 + line_h / 2) * game->textures.tex_step;
+    game->wall_tex.tex_step = 1.0 * game->textures.north->height / line_h;
+    game->wall_tex.tex_pos = (wall_start - WIN_H / 2 + line_h / 2) * game->wall_tex.tex_step;
     //printf("tex_step : %f || ", game->textures.tex_step);
     draw_stripe(game, x, wall_start, wall_end);
 }

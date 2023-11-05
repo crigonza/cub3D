@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:23:24 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/29 12:49:00 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/05 17:57:29 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@
 #include <math.h>
 #include <fcntl.h>
 
-#define WIN_W 800
-#define WIN_H 600
+#define WIN_W 1152
+#define WIN_H 864
 #define TILE 10
 #define PI 3.14159265358979323846;
 
-typedef struct s_point
+typedef struct s_pointw
 {
     int     x;
     int     y;
@@ -59,11 +59,16 @@ typedef struct s_texture
     mlx_texture_t   *east;
     int             floor_color;
     int             ceiling_color;
+}           t_texture;
+
+typedef struct s_wall_tex
+{
+    mlx_texture_t   *tex;
     int             tex_x;
     int             tex_y;
-    double             tex_step;
-    double             tex_pos;
-}           t_texture;
+    double          tex_step;
+    double          tex_pos;
+}           t_wall_tex;
 
 typedef struct s_ray
 {
@@ -110,6 +115,7 @@ typedef struct s_game
     t_map       map;
     t_player    player;
     t_texture   textures;
+    t_wall_tex  wall_tex;
     t_ray       raycast;
 }           t_game;
 
@@ -127,6 +133,8 @@ int         check_data(t_data *data, t_game *game);
 //controls.c//
 void        move_forward(t_game *game);
 void        move_backward(t_game *game);
+void        move_right(t_game *game);
+void        move_left(t_game *game);
 void        rotate_left(t_player *player);
 void        rotate_right(t_player *player);
 //free_utils//
