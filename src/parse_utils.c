@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:54:17 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/24 19:34:46 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/05 18:59:47 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,53 @@ t_color    get_color(char *rgb)
     }
     free (rgb);
     return (color);
+}
+
+void    set_plane(t_player *player, char dir)
+{
+    if (dir == 'N')
+    {
+        player->plane_x = 0.66;
+        player->plane_y = 0;
+    }
+    else if (dir == 'S')
+    {
+        player->plane_x = -0.66;
+        player->plane_y = 0;
+    }
+    else if (dir == 'W')
+    {
+        player->plane_x = 0;
+        player->plane_y = -0.66;
+    }
+    else if (dir == 'E')
+    {
+        player->plane_x = 0;
+        player->plane_y = 0.66;
+    }
+}
+
+void    set_dir(t_player *player, char dir)
+{
+    if (dir == 'N')
+    {
+        player->dir_x = 0;
+        player->dir_y = -1;
+    }
+    else if (dir == 'S')
+    {
+        player->dir_x = 0;
+        player->dir_y = 1;
+    }
+    else if (dir == 'W')
+    {
+        player->dir_x = -1;
+        player->dir_y = 0;
+    }
+    else if (dir == 'E')
+    {
+        player->dir_x = 1;
+        player->dir_y = 0;
+    }
+    set_plane(player, dir);
 }

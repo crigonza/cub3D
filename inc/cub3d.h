@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:23:24 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/05 17:57:29 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/05 19:08:35 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "../MLX42/include/MLX42/MLX42.h"
 #include "../Libft/libft.h"
+#include "structs.h"
 #include <stdlib.h>
 #include <unistd.h>
 #include <math.h>
@@ -25,107 +26,11 @@
 #define TILE 10
 #define PI 3.14159265358979323846;
 
-typedef struct s_pointw
-{
-    int     x;
-    int     y;
-}           t_point;
-
-typedef struct s_color
-{
-    int     red;
-    int     green;
-    int     blue;
-    int     alpha;
-}           t_color;
-
-typedef struct s_player
-{
-    double      pos_x;
-    double      pos_y;
-    double      dir_x;
-    double      dir_y;
-    double      plane_x;
-    double      plane_y;
-    double      speed;
-    double      rotate_speed;
-}           t_player;
-
-typedef struct s_texture
-{
-    mlx_texture_t   *north;
-    mlx_texture_t   *south;
-    mlx_texture_t   *west;
-    mlx_texture_t   *east;
-    int             floor_color;
-    int             ceiling_color;
-}           t_texture;
-
-typedef struct s_wall_tex
-{
-    mlx_texture_t   *tex;
-    int             tex_x;
-    int             tex_y;
-    double          tex_step;
-    double          tex_pos;
-}           t_wall_tex;
-
-typedef struct s_ray
-{
-    double      camera;
-    double      ray_x;
-    double      ray_y;
-    double      side_dist_x;
-    double      side_dist_y;
-    double      delta_dist_x;
-    double      delta_dist_y;
-    double      wall_dist;
-    double      wall_x;
-    int         map_x;
-    int         map_y;
-    int         step_x;
-    int         step_y;
-    int         hit;
-    int         side_hit;
-}           t_ray;
-
-typedef struct s_data
-{
-    char        *north;
-    char        *south;
-    char        *west;
-    char        *east;
-    t_color     floor;
-    t_color     ceiling;
-    int         map_start;
-    int         map_lines;
-}           t_data;
-
-typedef struct s_map
-{
-    char        **map_array;
-    int         map_h;
-    int         map_w;
-}           t_map;
-
-typedef struct s_game
-{
-    mlx_t       *mlx;
-    mlx_image_t *img;
-    t_map       map;
-    t_player    player;
-    t_texture   textures;
-    t_wall_tex  wall_tex;
-    t_ray       raycast;
-}           t_game;
-
-
 //check_map//
 int         check_first_and_last(char *first, char *last);
 int         check_map_point(char **map, int y, int x);
 int         check_map(t_map map);
 //checker.c//
-void        set_dir(t_player *player, char dir);
 int         check_player(t_game *game);
 int         check_colors(t_data *data, t_game *game);
 int         load_textures(t_data *data, t_game *game);
@@ -137,6 +42,10 @@ void        move_right(t_game *game);
 void        move_left(t_game *game);
 void        rotate_left(t_player *player);
 void        rotate_right(t_player *player);
+//draw.c//
+void        draw_sky_and_floor(t_game *game, int x);
+int         dim_color(t_color *color, double dist);
+void        draw_stripe(t_game *game, int x, int start, int end);
 //free_utils//
 void        game_over(t_game *game);
 void        free_data(t_data *data);
@@ -154,13 +63,23 @@ int         main(int argc, char **argv);
 int         spaces_line(char *line);
 char        *get_path(char *line);
 t_color     get_color(char *rgb);
+void        set_plane(t_player *player, char dir);
+void        set_dir(t_player *player, char dir);
 //parser.c//
 void        map_data(t_data *data, int fd, int lines);
 void        parse_colors(t_data *data, int fd, int lines);
 void        parse_textures(t_data *data, int fd);
 void        parse_map(t_data *data, int fd, t_game *game);
 //raycast.c//
+void        ray_refresh(t_ray *ray, t_player *player, int x);
+void        ray_dir(t_ray *ray, t_player *player);
+void        check_hit(t_game *game);
+void        get_wall_height(t_game *game, int x);
 void        raycast(t_game *game);
+//texture.c//
+t_color      get_texture_pixel(mlx_texture_t *texture, int x, int y);
+void         get_wall_texture(t_game * game);
+void         set_tex_params(t_wall_tex *wall_tex, t_ray *ray);
 //utils.c//
 char        *get_next_line(int fd);
 int         get_rgba(int r, int g, int b, int a);

@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:29:04 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/29 12:54:06 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/05 19:04:19 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,24 +66,6 @@ void    parse_and_check(t_game *game, char *file)
         exit (EXIT_FAILURE);
     }
     free_data(&data);
-}
-
-void	set_background(mlx_image_t *img)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < WIN_H)
-	{
-		y = 0;
-		while (y < WIN_W)
-		{
-			mlx_put_pixel(img, y, x, 0x2201000);
-			y++;
-		}
-		x++;
-	}
 }
 
 int main(int argc, char **argv)
