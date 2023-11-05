@@ -22,6 +22,8 @@
 
 #define WIN_W 800
 #define WIN_H 600
+#define TILE 10
+#define PI 3.14159265358979323846;
 
 typedef struct s_point
 {
@@ -132,6 +134,7 @@ void        game_over(t_game *game);
 void        free_data(t_data *data);
 //hooks.c//
 void        key_hook(mlx_key_data_t keydata, void *params);
+void        my_mouse_hook(double pos_x, double pos_y, void *params);
 void        main_hook(void *params);
 //initialize.c//
 void        data_init(t_data *data);
@@ -154,6 +157,7 @@ void        raycast(t_game *game);
 char        *get_next_line(int fd);
 int         get_rgba(int r, int g, int b, int a);
 
-
+void        minimap_square(t_game *game, int x, int y, int color);
+void        minimap_squares(t_game *game);
 
 #endif
