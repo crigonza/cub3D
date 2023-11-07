@@ -3,8 +3,8 @@ SO ./textures/wall_up2u.png
 WE ./textures/wall_coal.png
 EA ./textures/wall_taq.png
 
-F 120,50,50
-C 50,120,50
+F 45,54,70
+C 20,20,20
 
 111111111111111111111111111111111
 100000000000000000000000000000001
