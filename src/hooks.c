@@ -36,19 +36,14 @@ void    key_hook(mlx_key_data_t keydata, void *params)
 void    my_mouse_hook(double pos_x, double pos_y, void *params)
 {
     t_game  *game;
+    double   angle;
 
     game = params;
     (void)pos_y;
-    if (pos_x > WIN_W / 1.5)
+    if (pos_x != WIN_W / 2)
     {
-		game->player.rotate_speed = .05;
-        rotate_right(&game->player);
-        mlx_set_mouse_pos(game->mlx, WIN_H / 2, WIN_W / 2);
-    }
-	else if (pos_x < WIN_W / 4)
-	{
-        game->player.rotate_speed = .05;
-        mlx_set_mouse_pos(game->mlx, WIN_H / 2, WIN_W / 2);
+        angle = (.001 * (pos_x - WIN_W/2) * game->player.rotate_speed);
+        rotate(&game->player, angle);
     }
 }
 
@@ -68,7 +63,7 @@ void    main_hook(void *params)
     if(mlx_is_key_down(game->mlx, MLX_KEY_S))
         move_backward(game);
     if(mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
-        rotate_left(&game->player);
+        rotate(&game->player, -game->player.rotate_speed);
     if(mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
-        rotate_right(&game->player);
+        rotate(&game->player, game->player.rotate_speed);
 }

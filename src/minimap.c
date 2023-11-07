@@ -1,23 +1,5 @@
 #include "../inc/cub3d.h"
 
-/*void    minimap_circle(t_game *game, int x, int y, int color)
-{
-    double i;
-    double angle;
-    double dx;
-    double dy;
- 
-    i = 0;
-    while (i < 360)
-    {
-        angle = i;
-        dx = TILE * cos((angle * PI) / 180);
-        dy = TILE * sin((angle * PI) / 180);
-        mlx_put_pixel(game->img, (int)dx + x, (int)dy + y, color);
-        i += 0.1;
-    }
-}*/
-
 void    minimap_square(t_game *game, int x, int y, int color)
 {
     int dx;

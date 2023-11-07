@@ -52,28 +52,15 @@ void move_left(t_game *game)
         game->player.pos_y = newPosY;
 }
 
-void rotate_right(t_player *player)
+void rotate(t_player *player, float angle)
 {
     double  old_dir_x;
     double  old_plane_x;
 
     old_dir_x = player->dir_x;
     old_plane_x = player->plane_x;
-    player->dir_x = player->dir_x * cos(player->rotate_speed) - player->dir_y * sin(player->rotate_speed);
-    player->dir_y = old_dir_x * sin(player->rotate_speed) + player->dir_y * cos (player->rotate_speed);
-    player->plane_x  = player->plane_x * cos(player->rotate_speed) - player->plane_y * sin(player->rotate_speed);
-    player->plane_y  = old_plane_x * sin(player->rotate_speed) + player->plane_y * cos(player->rotate_speed);
-}
-
-void rotate_left(t_player *player)
-{
-    double  old_dir_x;
-    double  old_plane_x;
-
-    old_dir_x = player->dir_x;
-    old_plane_x = player->plane_x;
-    player->dir_x = player->dir_x * cos(-player->rotate_speed) - player->dir_y * sin(-player->rotate_speed);
-    player->dir_y = old_dir_x * sin(-player->rotate_speed) + player->dir_y * cos (-player->rotate_speed);
-    player->plane_x  = player->plane_x * cos(-player->rotate_speed) - player->plane_y * sin(-player->rotate_speed);
-    player->plane_y  = old_plane_x * sin(-player->rotate_speed) + player->plane_y * cos(-player->rotate_speed);
+    player->dir_x = player->dir_x * cos(angle) - player->dir_y * sin(angle);
+    player->dir_y = old_dir_x * sin(angle) + player->dir_y * cos (angle);
+    player->plane_x  = player->plane_x * cos(angle) - player->plane_y * sin(angle);
+    player->plane_y  = old_plane_x * sin(angle) + player->plane_y * cos(angle);
 }

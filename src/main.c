@@ -76,12 +76,13 @@ int main(int argc, char **argv)
         exit(EXIT_FAILURE);
     parse_and_check(&game, argv[1]);
     game.mlx = mlx_init(WIN_W, WIN_H, "cub3D", true);
+    mlx_set_cursor_mode(game.mlx, MLX_MOUSE_HIDDEN);
+    mlx_set_mouse_pos(game.mlx, WIN_H / 2, WIN_W / 2);
     game.img = mlx_new_image(game.mlx, WIN_W, WIN_H);
     mlx_image_to_window(game.mlx, game.img, 0, 0);
-    mlx_set_mouse_pos(game.mlx, WIN_H / 2, WIN_W / 2);
+    mlx_cursor_hook(game.mlx, my_mouse_hook, &game);
     mlx_loop_hook(game.mlx, main_hook, &game);
     mlx_key_hook(game.mlx, key_hook, &game);
-    mlx_mouse_hook(game.mlx, my_mouse_hook, &game);
     mlx_loop(game.mlx);
     game_over(&game);
     mlx_delete_image(game.mlx, game.img);
