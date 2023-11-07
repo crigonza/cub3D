@@ -1,0 +1,16 @@
+NO ./textures/wall42.png
+SO ./textures/wall_up2u.png
+WE ./textures/wall_coal.png
+EA ./textures/wall_taq.png
+F 45,54,70
+C 20,20,20
+1111111111
+1000000001
+1000000001
+1000000001
+1000S00001
+1000000001
+1000000001
+1000000001
+1000000001
+1111111111

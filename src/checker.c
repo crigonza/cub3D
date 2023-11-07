@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:47:24 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/05 19:01:16 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/07 09:37:38 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,10 @@ int     check_data(t_data *data, t_game *game)
         ft_putendl_fd("Error: missing player start point.", 2);
         return (0);
     }
-    /* if (!check_map(game->map))
+    if (!check_map(game->map))
     {
         ft_putendl_fd("Error: map wall is not closed.", 2);
         return (0);
-    } */
+    }
     return (1);
 }

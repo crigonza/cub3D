@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:23:24 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/05 19:08:35 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/07 11:21:04 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,6 @@ int         get_rgba(int r, int g, int b, int a);
 
 void        minimap_square(t_game *game, int x, int y, int color);
 void        minimap_squares(t_game *game);
+void        minimap_player(t_game *game, int x, int y, int color);
 
 #endif

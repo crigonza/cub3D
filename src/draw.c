@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:46:12 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/05 19:09:58 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/07 11:19:32 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int     dim_color(t_color *color, double dist)
     int     new_color;
 
     //printf("distancia: %f\n", dist);
-    dist /= 1.5;
+    dist /= 3;
     if (dist < 1)
         dist = 1;
     /* else if (dist > 3)
@@ -65,3 +65,27 @@ void    draw_stripe(t_game *game, int x, int start, int end)
         y++;
     }
 }
+
+/* void    draw_vec(t_game *game, int x_s, int y_s, int x_e, int y_e, int color)
+{
+    double  deltaX; 
+    double  deltaY;
+    double  pixelX;
+    double  pixelY;
+    int     pixels;
+    
+    deltaX = x_e - x_s; 
+    deltaY = y_e - y_s;
+    pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
+    deltaX /= pixels; 
+    deltaY /= pixels;
+    pixelX = x_s;
+    pixelY = y_s;
+    while (pixels)
+    {
+        mlx_put_pixel(game->img, (int)pixelX, (int)pixelY, color);
+        pixelX += deltaX;
+        pixelY += deltaY;
+        --pixels;
+    }
+} */

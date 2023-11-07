@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:29:04 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/05 19:04:19 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/07 09:42:40 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,6 @@ int main(int argc, char **argv)
     game_over(&game);
     mlx_delete_image(game.mlx, game.img);
     mlx_terminate(game.mlx);
-    // system("leaks --q cub3d");
+    system("leaks --q cub3d");
     return (0);
 }
