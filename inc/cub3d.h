@@ -24,7 +24,6 @@
 #define WIN_W 1152
 #define WIN_H 864
 #define TILE 10
-#define PI 3.14159265358979323846;
 
 //check_map//
 int         check_first_and_last(char *first, char *last);
@@ -42,6 +41,7 @@ void        move_right(t_game *game);
 void        move_left(t_game *game);
 void        rotate_left(t_player *player);
 void        rotate_right(t_player *player);
+void        rotate(t_player *player, float angle);
 //draw.c//
 void        draw_sky_and_floor(t_game *game, int x);
 int         dim_color(t_color *color, double dist);
