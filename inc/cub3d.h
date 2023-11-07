@@ -39,8 +39,6 @@ void        move_forward(t_game *game);
 void        move_backward(t_game *game);
 void        move_right(t_game *game);
 void        move_left(t_game *game);
-void        rotate_left(t_player *player);
-void        rotate_right(t_player *player);
 void        rotate(t_player *player, float angle);
 //draw.c//
 void        draw_sky_and_floor(t_game *game, int x);
