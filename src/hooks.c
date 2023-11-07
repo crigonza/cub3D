@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:02:56 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/07 11:20:32 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/07 13:08:22 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void    key_hook(mlx_key_data_t keydata, void *params)
     game = params;
     if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
         mlx_close_window(game->mlx);
-    if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+    /* if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
         move_left(game);
     if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
         move_right(game);
@@ -30,7 +30,7 @@ void    key_hook(mlx_key_data_t keydata, void *params)
     if (keydata.key == MLX_KEY_LEFT && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
         rotate_left(&game->player);
     if (keydata.key == MLX_KEY_RIGHT && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
-        rotate_right(&game->player);
+        rotate_right(&game->player); */
 }
 
 void    my_mouse_hook(double pos_x, double pos_y, void *params)
@@ -59,4 +59,16 @@ void    main_hook(void *params)
     game = (t_game*)params;
     raycast(game);
     minimap_squares(game);
+    if(mlx_is_key_down(game->mlx, MLX_KEY_A))
+        move_left(game);
+    if(mlx_is_key_down(game->mlx, MLX_KEY_D))
+        move_right(game);
+    if(mlx_is_key_down(game->mlx, MLX_KEY_W))
+        move_forward(game);
+    if(mlx_is_key_down(game->mlx, MLX_KEY_S))
+        move_backward(game);
+    if(mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
+        rotate_left(&game->player);
+    if(mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
+        rotate_right(&game->player);
 }

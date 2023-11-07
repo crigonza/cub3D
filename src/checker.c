@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:47:24 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/07 09:37:38 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/07 13:08:58 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int     check_player(t_game *game)
                 game->player.pos_x = j;
                 game->player.pos_y = i;
                 set_dir(&game->player, game->map.map_array[i][j]);
-                game->player.speed = 0.1;
-                game->player.rotate_speed = 0.1;
+                game->player.speed = 0.05;
+                game->player.rotate_speed = 0.05;
                 return (1);
             }
             j++;
