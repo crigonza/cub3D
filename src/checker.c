@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:47:24 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/07 13:08:58 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/10 18:43:08 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int     check_player(t_game *game)
             if (game->map.map_array[i][j] == 'N' || game->map.map_array[i][j] == 'S' || \
                 game->map.map_array[i][j] == 'W' || game->map.map_array[i][j] == 'E')
             {
-                game->player.pos_x = j;
-                game->player.pos_y = i;
+                game->player.pos_x = j + 0.5;
+                game->player.pos_y = i + 0.5;
                 set_dir(&game->player, game->map.map_array[i][j]);
-                game->player.speed = 0.05;
-                game->player.rotate_speed = 0.05;
+                game->player.speed = 0.02;
+                game->player.rotate_speed = 0.02;
                 return (1);
             }
             j++;
@@ -51,6 +51,12 @@ int     check_colors(t_data *data, t_game *game)
     if (data->floor.red == -1 || data->ceiling.red == -1)
     {
         ft_putendl_fd("Error: missing floor or ceiling color.", 2);
+        return (0);
+    }
+    if (data->floor.red < 0 || data->floor.green < 0 || data->floor.blue < 0 || \
+        data->ceiling.red < 0 || data->ceiling.green < 0 || data->ceiling.blue < 0)
+    {
+        ft_putendl_fd("Error: invalid floor or ceiling rgb color.", 2);
         return (0);
     }
     game->textures.ceiling_color = get_rgba(data->ceiling.red, data->ceiling.green, data->ceiling.blue, 0xFF);

@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 17:33:16 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/27 20:58:18 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/10 18:37:35 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ void    parse_textures(t_data *data, int fd)
     {
         if (!ft_strncmp(line, "NO ", 3))
             data->north = get_path(line);
-        if (!ft_strncmp(line, "SO ", 3))
+        if (!ft_strncmp(line, "SO ", 3) && data->north != NULL)
             data->south = get_path(line);
-        if (!ft_strncmp(line, "WE ", 3))
+        if (!ft_strncmp(line, "WE ", 3) && data->south != NULL)
             data->west = get_path(line);
-        if (!ft_strncmp(line, "EA ", 3))
+        if (!ft_strncmp(line, "EA ", 3) && data->west != NULL)
             data->east = get_path(line);
         free (line);
         lines++;

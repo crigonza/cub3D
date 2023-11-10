@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 11:16:15 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/05 18:53:33 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/10 18:34:48 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void    get_wall_height(t_game *game, int x)
     wall_end = line_h / 2 + WIN_H / 2;
     if (wall_end >= WIN_H)
         wall_end = WIN_H - 1;
-    game->wall_tex.tex_step = 1.0 * game->textures.north->height / line_h;
+    game->wall_tex.tex_step = 1.0 * (game->textures.north->height - 1) / line_h;
     game->wall_tex.tex_pos = (wall_start - WIN_H / 2 + line_h / 2) * game->wall_tex.tex_step;
     draw_stripe(game, x, wall_start, wall_end);
 }
