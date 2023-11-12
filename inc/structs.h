@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:54:04 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/07 09:59:50 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/12 22:20:34 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,22 @@ typedef struct s_map
     int         map_w;
 }           t_map;
 
+typedef struct s_sprite
+{
+    int             frame_counter;
+    int             frame_num;
+}           t_sprite;
+
 typedef struct s_game
 {
     mlx_t       *mlx;
     mlx_image_t *img;
+    mlx_image_t *spt;
     t_map       map;
     t_player    player;
     t_texture   textures;
     t_wall_tex  wall_tex;
+    t_sprite    sprite;
     t_ray       raycast;
 }           t_game;
 

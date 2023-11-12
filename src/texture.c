@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:49:52 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/10 18:24:28 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/11 21:08:54 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,14 @@
 
 t_color     get_texture_pixel(mlx_texture_t *texture, int x, int y)
 {
-    //int         rgba;
     t_color     color;
     uint8_t     *pixel;
     
-    /* if (y > texture->height)
-        y = y % texture->height;
-    if (x > texture->width)
-        x = x % texture->width; */
     pixel = texture->pixels + (y *texture->width + x) * texture->bytes_per_pixel;
     color.red = pixel[0];
     color.green = pixel[1];
     color.blue = pixel[2];
     color.alpha = pixel[3];
-    // rgba = get_rgba(color.red, color.green, color.blue, color.alpha);
     return (color);
 }
 

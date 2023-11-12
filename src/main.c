@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:29:04 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/07 09:42:40 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/12 22:22:31 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,17 @@ int main(int argc, char **argv)
     mlx_set_mouse_pos(game.mlx, WIN_H / 2, WIN_W / 2);
     game.img = mlx_new_image(game.mlx, WIN_W, WIN_H);
     mlx_image_to_window(game.mlx, game.img, 0, 0);
+    game.spt = mlx_new_image(game.mlx, WIN_W, WIN_H);
+    game.sprite.frame_num = 0;
+    game.sprite.frame_counter = 0;
+    mlx_image_to_window(game.mlx, game.spt, WIN_W - 512, WIN_H - 512);
     mlx_cursor_hook(game.mlx, my_mouse_hook, &game);
     mlx_loop_hook(game.mlx, main_hook, &game);
     mlx_key_hook(game.mlx, key_hook, &game);
     mlx_loop(game.mlx);
     game_over(&game);
     mlx_delete_image(game.mlx, game.img);
+    mlx_delete_image(game.mlx, game.spt);
     mlx_terminate(game.mlx);
     system("leaks --q cub3d");
     return (0);
