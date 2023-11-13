@@ -12,6 +12,31 @@
 
 # include "../inc/cub3d.h"
 
+int     check_player_duplicate(t_game *game)
+{
+    int i;
+    int j;
+    int dup;
+
+    i = 0;
+    dup = 0;
+    while (i < game->map.map_h) 
+    {
+        j = 0;
+        while (game->map.map_array[i][j])
+        {
+            if (game->map.map_array[i][j] == 'N' || game->map.map_array[i][j] == 'S' || \
+                game->map.map_array[i][j] == 'W' || game->map.map_array[i][j] == 'E')
+                    dup++;
+            j++;
+        }
+        i++;
+    }
+    if (dup == 1)
+        return(1);
+    return (0);
+}
+
 int     check_player(t_game *game)
 {
     int   i;
@@ -104,14 +129,14 @@ int     check_data(t_data *data, t_game *game)
         ft_putendl_fd("Error: invalid map.", 2);
         return (0);
     }
-    if (!check_player(game))
+    if (!check_player(game) || !check_player_duplicate(game))
     {
         ft_putendl_fd("Error: missing player start point.", 2);
         return (0);
     }
     if (!check_map(game->map))
     {
-        ft_putendl_fd("Error: map wall is not closed.", 2);
+        ft_putendl_fd("Error: map is not correct.", 2);
         return (0);
     }
     return (1);

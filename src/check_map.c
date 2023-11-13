@@ -12,6 +12,34 @@
 
 #include "../inc/cub3d.h"
 
+
+int     check_map_chars(t_map map)
+{
+    int x;
+    int y;
+
+    y = 0;
+    while (y < map.map_h)
+    {
+        x = 0;
+        while (x < map.map_w)
+        {
+        if ((ft_strchr("10WESN", map.map_array[y][x]) == NULL))
+            {
+                if (map.map_array[y][x] != 32 && map.map_array[y][x] != 10  && \
+                    map.map_array[y][x] != '\t' && map.map_array[y][x] != '\0' && \
+                    map.map_array[y][x] != 1) 
+                    {
+                        return(0);
+                    }
+            }
+            x++;
+        }
+        y++;
+    }
+    return(1);
+}
+
 int     check_first_and_last(char *first, char *last)
 {
     int x;
@@ -51,6 +79,8 @@ int     check_map(t_map map)
     int x;
     int y;
 
+    if (!check_map_chars(map))
+        return(0);
     y = 1;
     if (!check_first_and_last(map.map_array[0], map.map_array[map.map_h - 1]))
         return(0);
