@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 17:33:16 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/10 18:37:35 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/13 19:37:45 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void    parse_colors(t_data *data, int fd, int lines)
             break;
         line = get_next_line(fd);
     }
-    // printf("lineas despues de los colores: %d\n", lines);
     map_data(data, fd, lines);
 }
 
@@ -82,7 +81,6 @@ void    parse_textures(t_data *data, int fd)
             break;
         line = get_next_line(fd);
     }
-    // printf("lineas despues de las texturas: %d\n", lines);
     parse_colors(data, fd, lines);
 }
 

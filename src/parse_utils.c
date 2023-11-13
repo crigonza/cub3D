@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:54:17 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/05 18:59:47 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:20:45 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,29 @@ char    *get_path(char *line)
     return (path);
 }
 
+int     check_color_values(char **color_split)
+{
+    int i;
+    int j;
+
+    i = 0;
+    while(color_split[i])
+    {
+        j = 0;
+        while(color_split[i][j])
+        {
+            if ((color_split[i][j] > '9' || color_split[i][j] < '0') && color_split[i][j] != '\n')
+                return (0);
+            j++;
+        }
+        i++;
+    }
+        if (i > 3)
+            return (0);
+    return (1);
+}
+
+
 t_color    get_color(char *rgb)
 {
     char        **rgb_split;
@@ -53,9 +76,14 @@ t_color    get_color(char *rgb)
     
     i = 0;
     rgb_split = ft_split(rgb, ',');
-    color.red = ft_atoi(rgb_split[0]);
-    color.green = ft_atoi(rgb_split[1]);
-    color.blue = ft_atoi(rgb_split[2]);
+    if (check_color_values(rgb_split) == 1)
+    {
+        color.red = ft_atoi(rgb_split[0]);
+        color.green = ft_atoi(rgb_split[1]);
+        color.blue = ft_atoi(rgb_split[2]);
+    }
+    else
+        color.red = -1;
     if (rgb_split != NULL)
     {
         while (rgb_split[i])
