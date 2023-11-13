@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:54:04 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/12 22:20:34 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/13 08:02:12 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct s_sprite
 
 typedef struct s_game
 {
+    int         bonus;
     mlx_t       *mlx;
     mlx_image_t *img;
     mlx_image_t *spt;

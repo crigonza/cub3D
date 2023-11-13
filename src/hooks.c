@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:02:56 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/12 22:21:51 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/13 08:16:16 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ void    main_hook(void *params)
 
     game = (t_game*)params;
     raycast(game);
-    draw_sprite(game);
+    if (game->bonus)
+        draw_sprite(game);
     minimap_squares(game);
     if(mlx_is_key_down(game->mlx, MLX_KEY_A))
         move_left(game);

@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:23:24 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/07 12:55:27 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/13 08:13:59 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void        main_hook(void *params);
 //initialize.c//
 void        data_init(t_data *data);
 //main.c//
-int         check_args(int argc, char **argv);
+int         check_args(int argc, char **argv, t_game *game);
 void        parse_and_check(t_game *game, char *file);
 int         main(int argc, char **argv);
 //parser_utils//
