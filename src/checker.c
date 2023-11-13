@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:47:24 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/13 20:18:52 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/13 21:04:36 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int     check_player(t_game *game)
         j = 0;
         while (game->map.map_array[i][j])
         {
-            if (game->map.map_array[i][j] == 'N' || game->map.map_array[i][j] == 'S' || \
-                game->map.map_array[i][j] == 'W' || game->map.map_array[i][j] == 'E')
+            if ((game->map.map_array[i][j] == 'N' || game->map.map_array[i][j] == 'S' || \
+                game->map.map_array[i][j] == 'W' || game->map.map_array[i][j] == 'E') && check_map_point(game->map.map_array, i, j))
             {
                 game->player.pos_x = j + 0.5;
                 game->player.pos_y = i + 0.5;

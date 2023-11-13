@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 17:33:16 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/13 19:37:45 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/13 22:09:43 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,29 @@ void    map_data(t_data *data, int fd, int lines)
     printf("map lines = %d\n", data->map_lines); */
 }
 
+int     is_valid_color(char *line)
+{
+    int i;
+    int s;
+
+    i = 2;
+    s = 0;
+    while (line[i] && line[i] != '\n')
+    {
+        if ((line[i] < '0' || line[i] > '9') && line[i] != 32)
+        {
+            if (line[i] == ',')
+                s++;
+            else
+                return (0);
+        }
+        i++;
+    }
+    if ( s != 2)
+        return(0);
+    return (1);
+}
+
 void    parse_colors(t_data *data, int fd, int lines)
 {
     char    *line;
@@ -45,9 +68,15 @@ void    parse_colors(t_data *data, int fd, int lines)
     while (line)
     {
         if (!ft_strncmp(line, "F ", 2))
-            data->floor = get_color(ft_substr(line, 2, ft_strlen(line)));
+        {
+            if (is_valid_color(line))
+                data->floor = get_color(ft_substr(line, 2, ft_strlen(line)));
+        }
         if (!ft_strncmp(line, "C ", 2))
-            data->ceiling = get_color(ft_substr(line, 2, ft_strlen(line)));
+        {
+            if (is_valid_color(line))
+                data->ceiling = get_color(ft_substr(line, 2, ft_strlen(line)));
+        }
         free(line);
         lines++;
         if (data->ceiling.red != -1)
@@ -67,7 +96,7 @@ void    parse_textures(t_data *data, int fd)
     line = get_next_line(fd);
     while (line)
     {
-        if (!ft_strncmp(line, "NO ", 3))
+        if (!ft_strncmp(line, "NO ", 3) && data->north == NULL)
             data->north = get_path(line);
         if (!ft_strncmp(line, "SO ", 3) && data->north != NULL)
             data->south = get_path(line);

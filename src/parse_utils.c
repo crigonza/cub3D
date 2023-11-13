@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:54:17 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/13 20:20:45 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/13 21:28:21 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int     check_color_values(char **color_split)
         }
         i++;
     }
-        if (i > 3)
+        if (i != 3)
             return (0);
     return (1);
 }
@@ -76,14 +76,9 @@ t_color    get_color(char *rgb)
     
     i = 0;
     rgb_split = ft_split(rgb, ',');
-    if (check_color_values(rgb_split) == 1)
-    {
-        color.red = ft_atoi(rgb_split[0]);
-        color.green = ft_atoi(rgb_split[1]);
-        color.blue = ft_atoi(rgb_split[2]);
-    }
-    else
-        color.red = -1;
+    color.red = ft_atoi(rgb_split[0]);
+    color.green = ft_atoi(rgb_split[1]);
+    color.blue = ft_atoi(rgb_split[2]);
     if (rgb_split != NULL)
     {
         while (rgb_split[i])

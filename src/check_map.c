@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:08:18 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/07 09:37:25 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/13 21:49:23 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ int     check_map_chars(t_map map)
         x = 0;
         while (x < map.map_w)
         {
-        if ((ft_strchr("10WESN", map.map_array[y][x]) == NULL))
+        if ((ft_strchr("10WESN ", map.map_array[y][x]) == NULL))
             {
                 if (map.map_array[y][x] != 32 && map.map_array[y][x] != 10  && \
                     map.map_array[y][x] != '\t' && map.map_array[y][x] != '\0' && \
                     map.map_array[y][x] != 1) 
                     {
+                        printf("retorna cero\n");
                         return(0);
                     }
             }
@@ -79,8 +80,8 @@ int     check_map(t_map map)
     int x;
     int y;
 
-    if (!check_map_chars(map))
-        return(0);
+    /* if (!check_map_chars(map))
+        return(0); */
     y = 1;
     if (!check_first_and_last(map.map_array[0], map.map_array[map.map_h - 1]))
         return(0);

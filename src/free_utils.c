@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:04:06 by crigonza          #+#    #+#             */
-/*   Updated: 2023/10/27 21:07:50 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/13 22:13:05 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void    game_over(t_game *game)
         free (game->map.map_array[i]);
         i++;
     }
+    free(game->map.map_array);
     mlx_delete_texture(game->textures.north);
     mlx_delete_texture(game->textures.south);
     mlx_delete_texture(game->textures.west);
