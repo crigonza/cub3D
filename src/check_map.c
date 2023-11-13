@@ -24,15 +24,12 @@ int     check_map_chars(t_map map)
         x = 0;
         while (x < map.map_w)
         {
-        if ((ft_strchr("10WESN ", map.map_array[y][x]) == NULL))
+           if ((map.map_array[y][x] != 32 && map.map_array[y][x] != 10  && \
+            map.map_array[y][x] != '\t' && map.map_array[y][x] != '\0' && \
+            map.map_array[y][x] != 1) && (ft_strchr("10WESN", map.map_array[y][x]) == NULL))
             {
-                if (map.map_array[y][x] != 32 && map.map_array[y][x] != 10  && \
-                    map.map_array[y][x] != '\t' && map.map_array[y][x] != '\0' && \
-                    map.map_array[y][x] != 1) 
-                    {
-                        printf("retorna cero\n");
-                        return(0);
-                    }
+                printf("retorna cero\n");
+                return(0);
             }
             x++;
         }
