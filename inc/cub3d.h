@@ -26,6 +26,7 @@
 #define TILE 10
 
 //check_map//
+int         check_map_vars(t_map map);
 int         check_first_and_last(char *first, char *last);
 int         check_map_point(char **map, int y, int x);
 int         check_map(t_map map);
