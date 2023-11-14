@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: itorres- <itorres-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:29:04 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/14 12:31:00 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/14 13:19:48 by itorres-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ int	main(int argc, char **argv)
 	mlx_set_cursor_mode(game.mlx, MLX_MOUSE_HIDDEN);
 	mlx_set_mouse_pos(game.mlx, WIN_H / 2, WIN_W / 2);
 	game.img = mlx_new_image(game.mlx, WIN_W, WIN_H);
+	mlx_image_to_window(game.mlx, game.img, 0, 0);
 	if (game.bonus)
 		sprite_init(&game);
-	mlx_image_to_window(game.mlx, game.spt, WIN_W - 512, WIN_H - 512);
 	mlx_cursor_hook(game.mlx, my_mouse_hook, &game);
 	mlx_loop_hook(game.mlx, main_hook, &game);
 	mlx_key_hook(game.mlx, key_hook, &game);

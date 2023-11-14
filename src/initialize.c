@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: itorres- <itorres-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:07:42 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/14 12:34:25 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/14 13:22:21 by itorres-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	data_init(t_data *data)
 
 void	sprite_init(t_game *game)
 {
-	mlx_image_to_window(game->mlx, game->img, 0, 0);
 	game->spt = mlx_new_image(game->mlx, WIN_W, WIN_H);
+	mlx_image_to_window(game->mlx, game->spt, WIN_W - 512, WIN_H - 512);
 	game->sprite.frame_num = 0;
 	game->sprite.frame_counter = 0;
 	game->sprite.frame1 = mlx_load_png("./textures/hand1.png");
