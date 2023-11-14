@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: itorres- <itorres-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:23:24 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/14 13:38:58 by itorres-         ###   ########.fr       */
+/*   Updated: 2023/11/14 13:55:26 by itorres-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include "../Libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
-# include "structs.h"
+# include "structs_bonus.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdlib.h>
@@ -85,5 +85,9 @@ void	set_tex_params(t_wall_tex *wall_tex, t_ray *ray);
 int		check_bonus(char *path, t_game *game);
 char	*get_next_line(int fd);
 int		get_rgba(int r, int g, int b, int a);
+// minimap.c//
+void	minimap_square(t_game *game, int x, int y, int color);
+void	minimap_squares(t_game *game);
+void	minimap_player(t_game *game, int x, int y, int color);
 
 #endif

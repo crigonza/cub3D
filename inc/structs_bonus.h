@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   structs_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: itorres- <itorres-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:54:04 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/14 13:52:47 by itorres-         ###   ########.fr       */
+/*   Updated: 2023/11/14 13:42:06 by itorres-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
+#ifndef STRUCTS_BONUS_H
+# define STRUCTS_BONUS_H
 
 # include "../MLX42/include/MLX42/MLX42.h"
 
@@ -92,6 +92,16 @@ typedef struct s_map
 	int				map_w;
 }					t_map;
 
+typedef struct s_sprite
+{
+	mlx_texture_t	*frame1;
+	mlx_texture_t	*frame2;
+	mlx_texture_t	*frame3;
+	mlx_texture_t	*frame4;
+	int				frame_counter;
+	int				frame_num;
+}					t_sprite;
+
 typedef struct s_game
 {
 	int				bonus;
@@ -102,6 +112,7 @@ typedef struct s_game
 	t_player		player;
 	t_texture		textures;
 	t_wall_tex		wall_tex;
+	t_sprite		sprite;
 	t_ray			raycast;
 }					t_game;
 
