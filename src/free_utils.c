@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itorres- <itorres-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:04:06 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/14 11:35:56 by itorres-         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:40:04 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ void	game_over(t_game *game)
 	mlx_delete_texture(game->textures.south);
 	mlx_delete_texture(game->textures.west);
 	mlx_delete_texture(game->textures.east);
+	mlx_delete_texture(game->sprite.frame1);
+	mlx_delete_texture(game->sprite.frame2);
+	mlx_delete_texture(game->sprite.frame3);
+	mlx_delete_texture(game->sprite.frame4);
 }
 
 void	free_data(t_data *data)

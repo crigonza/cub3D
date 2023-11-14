@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itorres- <itorres-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:23:24 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/14 11:33:18 by itorres-         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:30:29 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	rotate(t_player *player, float angle);
 void	draw_sky_and_floor(t_game *game, int x);
 int		dim_color(t_color *color, double dist);
 void	draw_stripe(t_game *game, int x, int start, int end);
+void	get_wall_height(t_game *game, int x);
 // free_utils//
 void	game_over(t_game *game);
 void	free_data(t_data *data);
@@ -54,6 +55,7 @@ void	my_mouse_hook(double pos_x, double pos_y, void *params);
 void	main_hook(void *params);
 // initialize.c//
 void	data_init(t_data *data);
+void	sprite_init(t_game *game);
 // main.c//
 int		check_args(int argc, char **argv, t_game *game);
 void	parse_and_check(t_game *game, char *file);
@@ -73,13 +75,14 @@ void	parse_map(t_data *data, int fd, t_game *game);
 void	ray_refresh(t_ray *ray, t_player *player, int x);
 void	ray_dir(t_ray *ray, t_player *player);
 void	check_hit(t_game *game);
-void	get_wall_height(t_game *game, int x);
+void	set_dist(t_game *game);
 void	raycast(t_game *game);
 // texture.c//
 t_color	get_texture_pixel(mlx_texture_t *texture, int x, int y);
 void	get_wall_texture(t_game *game);
 void	set_tex_params(t_wall_tex *wall_tex, t_ray *ray);
 // utils.c//
+int		check_bonus(char *path, t_game *game);
 char	*get_next_line(int fd);
 int		get_rgba(int r, int g, int b, int a);
 

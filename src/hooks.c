@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itorres- <itorres-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:02:56 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/14 11:15:58 by itorres-         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:45:16 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,42 +35,48 @@ void	my_mouse_hook(double pos_x, double pos_y, void *params)
 	}
 }
 
+void	draw_texture(t_game *game, mlx_texture_t *tex)
+{
+	t_color	color;
+	int	rgba;
+	int	y;
+	int x;
+	
+	y = 0;
+	while (y < tex->height)
+	{
+		x = 0;
+		while (x < tex->width)
+		{
+			color = get_texture_pixel(tex, x, y);
+			rgba = get_rgba(color.red, color.green, color.blue,
+					color.alpha);
+			mlx_put_pixel(game->spt, x, y, rgba);
+			x++;
+		}
+		y++;
+	}
+
+}
+
 void	draw_sprite(t_game *game)
 {
 	mlx_texture_t	*tex;
-	t_color			color;
-	int				rgba;
-	int				x;
-	int				y;
 
 	game->sprite.frame_counter++;
 	if (game->sprite.frame_counter == 15)
 	{
 		if (game->sprite.frame_num == 0)
-			tex = mlx_load_png("./textures/hand1.png");
+			tex = game->sprite.frame1;
 		if (game->sprite.frame_num == 1)
-			tex = mlx_load_png("./textures/hand2.png");
+			tex = game->sprite.frame2;
 		if (game->sprite.frame_num == 2)
-			tex = mlx_load_png("./textures/hand3.png");
+			tex = game->sprite.frame3;
 		if (game->sprite.frame_num == 3)
-			tex = mlx_load_png("./textures/hand4.png");
+			tex = game->sprite.frame4;
 		game->sprite.frame_counter = 0;
 		game->sprite.frame_num++;
-		y = 0;
-		while (y < tex->height)
-		{
-			x = 0;
-			while (x < tex->width)
-			{
-				color = get_texture_pixel(tex, x, y);
-				rgba = get_rgba(color.red, color.green, color.blue,
-						color.alpha);
-				mlx_put_pixel(game->spt, x, y, rgba);
-				x++;
-			}
-			y++;
-		}
-		mlx_delete_texture(tex);
+		draw_texture(game, tex);
 		if (game->sprite.frame_num == 4)
 			game->sprite.frame_num = 0;
 	}

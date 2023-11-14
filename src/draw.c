@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itorres- <itorres-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:46:12 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/14 11:16:54 by itorres-         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:23:19 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,23 @@ void	draw_stripe(t_game *game, int x, int start, int end)
 		mlx_put_pixel(game->img, x, y, dimmed_color);
 		y++;
 	}
+}
+
+void	get_wall_height(t_game *game, int x)
+{
+	int	line_h;
+	int	wall_start;
+	int	wall_end;
+
+	line_h = (int)(WIN_H / game->raycast.wall_dist);
+	wall_start = -line_h / 2 + WIN_H / 2;
+	if (wall_start < 0)
+		wall_start = 0;
+	wall_end = line_h / 2 + WIN_H / 2;
+	if (wall_end >= WIN_H)
+		wall_end = WIN_H - 1;
+	game->wall_tex.tex_step = 1.0 * (game->textures.north->height - 1) / line_h;
+	game->wall_tex.tex_pos = (wall_start - WIN_H / 2 + line_h / 2)
+		* game->wall_tex.tex_step;
+	draw_stripe(game, x, wall_start, wall_end);
 }

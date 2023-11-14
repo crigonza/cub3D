@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itorres- <itorres-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:54:04 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/14 11:34:56 by itorres-         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:44:48 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 # define STRUCTS_H
 
 # include "../MLX42/include/MLX42/MLX42.h"
-
-typedef struct s_pointw
-{
-	int				x;
-	int				y;
-}					t_point;
 
 typedef struct s_color
 {
@@ -100,6 +94,10 @@ typedef struct s_map
 
 typedef struct s_sprite
 {
+	mlx_texture_t 	*frame1;
+	mlx_texture_t 	*frame2;
+	mlx_texture_t 	*frame3;
+	mlx_texture_t 	*frame4;
 	int				frame_counter;
 	int				frame_num;
 }					t_sprite;
