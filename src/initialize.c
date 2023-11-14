@@ -6,7 +6,7 @@
 /*   By: itorres- <itorres-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:07:42 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/14 13:22:21 by itorres-         ###   ########.fr       */
+/*   Updated: 2023/11/14 13:38:12 by itorres-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,4 @@ void	data_init(t_data *data)
 	data->ceiling.blue = -1;
 	data->map_start = 0;
 	data->map_lines = 0;
-}
-
-void	sprite_init(t_game *game)
-{
-	game->spt = mlx_new_image(game->mlx, WIN_W, WIN_H);
-	mlx_image_to_window(game->mlx, game->spt, WIN_W - 512, WIN_H - 512);
-	game->sprite.frame_num = 0;
-	game->sprite.frame_counter = 0;
-	game->sprite.frame1 = mlx_load_png("./textures/hand1.png");
-	game->sprite.frame2 = mlx_load_png("./textures/hand2.png");
-	game->sprite.frame3 = mlx_load_png("./textures/hand3.png");
-	game->sprite.frame4 = mlx_load_png("./textures/hand4.png");
 }
