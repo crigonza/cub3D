@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: itorres- <itorres-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:02:56 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/14 12:45:16 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/14 13:14:10 by itorres-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ void	my_mouse_hook(double pos_x, double pos_y, void *params)
 void	draw_texture(t_game *game, mlx_texture_t *tex)
 {
 	t_color	color;
-	int	rgba;
-	int	y;
-	int x;
-	
+	int		rgba;
+	int		y;
+	int		x;
+
 	y = 0;
 	while (y < tex->height)
 	{
@@ -56,7 +56,6 @@ void	draw_texture(t_game *game, mlx_texture_t *tex)
 		}
 		y++;
 	}
-
 }
 
 void	draw_sprite(t_game *game)
