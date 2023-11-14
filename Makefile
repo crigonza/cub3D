@@ -6,7 +6,7 @@
 #    By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/18 19:27:43 by crigonza          #+#    #+#              #
-#    Updated: 2023/11/14 08:17:55 by crigonza         ###   ########.fr        #
+#    Updated: 2023/11/14 10:19:36 by crigonza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,17 +19,20 @@ LIBMLX	= ./MLX42
 LIBFT	= ./Libft
 
 HEADERS	= -I ./inc -I $(LIBMLX)/include -I $(LIBFT)/include
-/*LIBS	= -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a*/
-LIBS	= -lglfw -L /opt/homebrew/cellar/glfw/3.3.8/lib $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
-SRCS	= $(shell find ./src -iname "*.c")
-SRCS_BONUS	= $(shell find ./bonus -iname "*.c")
+LIBS	= -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
+# LIBS	= -lglfw -L /opt/homebrew/cellar/glfw/3.3.8/lib $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
+SRCS	= src/check_map.c src/checker.c src/controls.c src/draw.c \
+			src/free_utils.c src/hooks.c src/initialize.c src/main.c \
+			src/minimap.c src/parse_utils.c src/parser.c src/raycast.c \
+			src/texture.c src/utils.c
+BONUS_SRCS	= $(shell find ./bonus -iname "*.c")
 OBJS	= ${SRCS:.c=.o}
-BONUS_OBJS	= ${SRCS_BONUS:.c=.o}
+BONUS_OBJS	= ${BONUS_SRCS:.c=.o}
 
 
 all: libft libmlx $(NAME)
 
-bonus: libft lbmlx $(BONUS)
+bonus: libft libmlx $(BONUS)
 
 libft:
 	@$(MAKE) -C $(LIBFT)
@@ -37,12 +40,14 @@ libft:
 libmlx:
 	@$(MAKE) -C $(LIBMLX)
 
-
+%.o: %.c
+	$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
+	
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 
 $(BONUS): $(BONUS_OBJS)
-	@$(CC) $(CFLAGS) $(BONUS_OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+	@$(CC) $(BONUS_OBJS) $(LIBS) $(HEADERS) -o $(BONUS)
 
 clean:
 	@rm -f $(OBJS)
