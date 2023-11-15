@@ -6,22 +6,11 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:56:19 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/14 12:27:08 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:11:20 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-int	check_bonus(char *path, t_game *game)
-{
-	char	*tmp;
-
-	tmp = ft_strnstr(path, "bonus.cub", ft_strlen(path));
-	if (tmp == NULL)
-		game->bonus = 0;
-	else
-		game->bonus = 1;
-}
 
 char	*get_next_line(int fd)
 {

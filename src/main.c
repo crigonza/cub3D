@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itorres- <itorres-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:29:04 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/14 13:38:12 by itorres-         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:08:28 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int	main(int argc, char **argv)
 	mlx_loop(game.mlx);
 	game_over(&game);
 	mlx_delete_image(game.mlx, game.img);
-	mlx_delete_image(game.mlx, game.spt);
 	mlx_terminate(game.mlx);
 	return (0);
 }

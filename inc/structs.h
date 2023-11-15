@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itorres- <itorres-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:54:04 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/14 13:52:47 by itorres-         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:09:03 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ typedef struct s_map
 
 typedef struct s_game
 {
-	int				bonus;
 	mlx_t			*mlx;
 	mlx_image_t		*img;
 	mlx_image_t		*spt;
