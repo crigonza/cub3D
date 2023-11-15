@@ -27,10 +27,13 @@ void	game_over(t_game *game)
 	mlx_delete_texture(game->textures.south);
 	mlx_delete_texture(game->textures.west);
 	mlx_delete_texture(game->textures.east);
-	mlx_delete_texture(game->sprite.frame1);
-	mlx_delete_texture(game->sprite.frame2);
-	mlx_delete_texture(game->sprite.frame3);
-	mlx_delete_texture(game->sprite.frame4);
+	if (game->bonus)
+	{
+		mlx_delete_texture(game->sprite.frame1);
+		mlx_delete_texture(game->sprite.frame2);
+		mlx_delete_texture(game->sprite.frame3);
+		mlx_delete_texture(game->sprite.frame4);
+	}
 }
 
 void	free_data(t_data *data)
