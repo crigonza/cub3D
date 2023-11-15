@@ -89,7 +89,8 @@ int	main(int argc, char **argv)
 	mlx_loop(game.mlx);
 	game_over(&game);
 	mlx_delete_image(game.mlx, game.img);
-	mlx_delete_image(game.mlx, game.spt);
+	if (game.bonus)
+		mlx_delete_image(game.mlx, game.spt);
 	mlx_terminate(game.mlx);
 	return (0);
 }
