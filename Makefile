@@ -6,7 +6,7 @@
 #    By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/18 19:27:43 by crigonza          #+#    #+#              #
-#    Updated: 2023/11/15 17:10:00 by crigonza         ###   ########.fr        #
+#    Updated: 2023/11/15 19:47:00 by crigonza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS	= src/check_map.c src/checker.c src/controls.c src/draw.c \
 BONUS_SRCS	= bonus/check_map_bonus.c bonus/checker_bonus.c bonus/controls_bonus.c bonus/draw_bonus.c \
 			bonus/free_utils_bonus.c bonus/hooks_bonus.c bonus/initialize_bonus.c bonus/main_bonus.c \
 			bonus/minimap_bonus.c bonus/parse_utils_bonus.c bonus/parser_bonus.c bonus/raycast_bonus.c \
-			bonus/texture_bonus.c bonus/utils_bonus.c
+			bonus/texture_bonus.c bonus/utils_bonus.c bonus/draw_sprite_bonus.c bonus/check_utils_bonus.c
 OBJS	= ${SRCS:.c=.o}
 BONUS_OBJS	= ${BONUS_SRCS:.c=.o}
 

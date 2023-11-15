@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:54:04 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/15 17:09:03 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:15:44 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ typedef struct s_game
 {
 	mlx_t			*mlx;
 	mlx_image_t		*img;
-	mlx_image_t		*spt;
 	t_map			map;
 	t_player		player;
 	t_texture		textures;

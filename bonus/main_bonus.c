@@ -3,42 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itorres- <itorres-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:29:04 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/14 13:52:30 by itorres-         ###   ########.fr       */
+/*   Updated: 2023/11/15 19:40:18 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d_bonus.h"
-
-int	check_args(int argc, char **argv, t_game *game)
-{
-	char	*tmp;
-	int		fd;
-
-	if (argc != 2)
-	{
-		ft_putendl_fd("Error: invalid arguments number.", 2);
-		return (0);
-	}
-	tmp = ft_strnstr(argv[1], ".cub", ft_strlen(argv[1]));
-	if (tmp == NULL)
-	{
-		ft_putendl_fd("Error: invalid map archive.", 2);
-		return (0);
-	}
-	check_bonus(argv[1], game);
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-	{
-		ft_putendl_fd("Error: invalid archive format.", 2);
-		close(fd);
-		return (0);
-	}
-	close(fd);
-	return (1);
-}
 
 void	parse_and_check(t_game *game, char *file)
 {

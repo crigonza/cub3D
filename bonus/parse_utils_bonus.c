@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itorres- <itorres-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:54:17 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/14 13:52:34 by itorres-         ###   ########.fr       */
+/*   Updated: 2023/11/15 19:19:46 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,6 @@ char	*get_path(char *line)
 	path[j] = '\0';
 	return (path);
 }
-
-/*int	check_color_values(char **color_split)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (color_split[i])
-	{
-		j = 0;
-		while (color_split[i][j])
-		{
-			if ((color_split[i][j] > '9' || color_split[i][j] < '0')
-				&& color_split[i][j] != '\n')
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	if (i != 3)
-		return (0);
-	return (1);
-}*/
 
 t_color	get_color(char *rgb)
 {

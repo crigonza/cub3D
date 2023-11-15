@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itorres- <itorres-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:02:56 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/14 13:39:18 by itorres-         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:16:48 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,6 @@ void	key_hook(mlx_key_data_t keydata, void *params)
 		mlx_close_window(game->mlx);
 }
 
-void	draw_texture(t_game *game, mlx_texture_t *tex)
-{
-	t_color	color;
-	int		rgba;
-	int		y;
-	int		x;
-
-	y = 0;
-	while (y < tex->height)
-	{
-		x = 0;
-		while (x < tex->width)
-		{
-			color = get_texture_pixel(tex, x, y);
-			rgba = get_rgba(color.red, color.green, color.blue,
-					color.alpha);
-			mlx_put_pixel(game->spt, x, y, rgba);
-			x++;
-		}
-		y++;
-	}
-}
 
 void	main_hook(void *params)
 {
