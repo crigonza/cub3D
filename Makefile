@@ -6,13 +6,13 @@
 #    By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/18 19:27:43 by crigonza          #+#    #+#              #
-#    Updated: 2023/11/16 10:09:06 by crigonza         ###   ########.fr        #
+#    Updated: 2023/11/16 12:48:18 by crigonza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME	= cub3d
-BONUS	= cub3d_bonus
+NAME	= cub3D
+BONUS	= cub3D_bonus
 CFLAGS	= -Werror -Wextra -Wall
 
 LIBMLX	= ./MLX42
