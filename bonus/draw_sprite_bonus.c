@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 19:35:48 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/15 19:38:03 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/16 09:38:11 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	draw_texture(t_game *game, mlx_texture_t *tex)
 {
-	t_color	color;
-	int		rgba;
-	int		y;
-	int		x;
+	t_color		color;
+	int			rgba;
+	uint32_t	y;
+	uint32_t	x;
 
 	y = 0;
 	while (y < tex->height)

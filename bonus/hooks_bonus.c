@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:02:56 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/15 21:22:31 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/16 09:52:22 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	my_mouse_hook(double pos_x, double pos_y, void *params)
 		angle = (0.01 * (pos_x - WIN_W / 2) * game->player.rotate_speed);
 		rotate(&game->player, angle);
 	}
-	if (pos_x > WIN_H - (WIN_H / 3))
-			mlx_set_mouse_pos(game->mlx, WIN_H - (WIN_H / 3), WIN_W / 2);
-	if (pos_x < WIN_H / 3)
-			mlx_set_mouse_pos(game->mlx, WIN_H / 3, WIN_W / 2);
+	if (pos_x > (WIN_W / 2) + 50)
+		mlx_set_mouse_pos(game->mlx, (WIN_W / 2) + 50, WIN_H / 2);
+	if (pos_x < (WIN_W / 2) - 50)
+		mlx_set_mouse_pos(game->mlx, (WIN_W / 2) - 50, WIN_H / 2);
 }
 
 void	main_hook(void *params)

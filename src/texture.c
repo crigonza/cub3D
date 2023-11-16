@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itorres- <itorres-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:49:52 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/14 11:36:20 by itorres-         ###   ########.fr       */
+/*   Updated: 2023/11/16 10:12:28 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,16 @@ void	get_wall_texture(t_game *game)
 	if (game->raycast.side_hit == 0)
 	{
 		if (game->raycast.ray_x > 0)
-			game->wall_tex.tex = game->textures.west;
-		else
 			game->wall_tex.tex = game->textures.east;
+		else
+			game->wall_tex.tex = game->textures.west;
 	}
 	else
 	{
 		if (game->raycast.ray_y > 0)
-			game->wall_tex.tex = game->textures.north;
-		else
 			game->wall_tex.tex = game->textures.south;
+		else
+			game->wall_tex.tex = game->textures.north;
 	}
 }
 

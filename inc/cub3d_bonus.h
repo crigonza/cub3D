@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:23:24 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/15 19:50:58 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/16 09:30:33 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ t_color	get_texture_pixel(mlx_texture_t *texture, int x, int y);
 void	get_wall_texture(t_game *game);
 void	set_tex_params(t_wall_tex *wall_tex, t_ray *ray);
 // utils_bonus.c//
-int		check_bonus(char *path, t_game *game);
+void	check_bonus(char *path, t_game *game);
 char	*get_next_line(int fd);
 int		get_rgba(int r, int g, int b, int a);
 

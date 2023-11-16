@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itorres- <itorres-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:56:19 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/14 13:52:42 by itorres-         ###   ########.fr       */
+/*   Updated: 2023/11/16 09:30:00 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d_bonus.h"
 
-int	check_bonus(char *path, t_game *game)
+void	check_bonus(char *path, t_game *game)
 {
 	char	*tmp;
 
