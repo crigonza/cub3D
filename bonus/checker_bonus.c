@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itorres- <itorres-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:47:24 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/14 13:51:57 by itorres-         ###   ########.fr       */
+/*   Updated: 2023/11/20 19:14:44 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ int	check_data(t_data *data, t_game *game)
 	}
 	if (!check_map(game->map))
 	{
-		ft_putendl_fd("Error: map is not correct.", 2);
+		ft_putendl_fd("Error: invalid map.", 2);
 		return (0);
 	}
 	return (1);

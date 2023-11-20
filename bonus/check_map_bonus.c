@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itorres- <itorres-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:08:18 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/14 13:51:55 by itorres-         ###   ########.fr       */
+/*   Updated: 2023/11/20 19:30:44 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	check_map_point(char **map, int y, int x)
 		return (0);
 	else if (map[y - 1][x] == 32 || map[y + 1][x] == 32)
 		return (0);
-	else if (map[y - 1][x] == 10  || map[y + 1][x] == 10)
+	else if (map[y - 1][x] == '\0' || map[y + 1][x] == '\0')
 		return (0);
 	return (1);
 }

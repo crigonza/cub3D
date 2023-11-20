@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:56:19 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/16 09:30:00 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/20 19:05:38 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,22 @@ char	*get_next_line(int fd)
 int	get_rgba(int r, int g, int b, int a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
+}
+
+int	check_map_ini(char *line)
+{
+	int	i;
+	int	is_map;
+
+	i = 0;
+	is_map = 0;
+	while (line[i])
+	{
+		if (line[i] != '1' && line[i] != ' ' && line[i] != '\n')
+			is_map = 1;
+		i++;
+	}
+	if (is_map)
+		free(line);
+	return (is_map);
 }

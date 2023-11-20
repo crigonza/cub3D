@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 18:49:52 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/16 10:14:45 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/20 19:15:50 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,16 @@ void	get_wall_texture(t_game *game)
 	if (game->raycast.side_hit == 0)
 	{
 		if (game->raycast.ray_x > 0)
-			game->wall_tex.tex = game->textures.east;
-		else
 			game->wall_tex.tex = game->textures.west;
+		else
+			game->wall_tex.tex = game->textures.east;
 	}
 	else
 	{
 		if (game->raycast.ray_y > 0)
-			game->wall_tex.tex = game->textures.south;
-		else
 			game->wall_tex.tex = game->textures.north;
+		else
+			game->wall_tex.tex = game->textures.south;
 	}
 }
 

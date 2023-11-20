@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 19:39:33 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/16 09:28:23 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/20 19:22:37 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	check_file_colors(int *tex_and_col, char *file)
 		&& tex_and_col[3] == 1 && tex_and_col[4] == 1 && tex_and_col[5] == 1)
 		return (1);
 	else
-		return (0);
+		ft_putendl_fd("Error: duplicated texture or color.", 2);
+	return (0);
 }
 
 int	check_file_tex(char *file)
@@ -78,7 +79,7 @@ int	check_args(int argc, char **argv)
 		return (0);
 	}
 	tmp = ft_strnstr(argv[1], ".cub", ft_strlen(argv[1]));
-	if (tmp == NULL || !check_file_tex(argv[1]))
+	if (tmp == NULL)
 	{
 		ft_putendl_fd("Error: invalid map archive.", 2);
 		return (0);
@@ -90,6 +91,8 @@ int	check_args(int argc, char **argv)
 		close(fd);
 		return (0);
 	}
+	if (!check_file_tex(argv[1]))
+		return (0);
 	close(fd);
 	return (1);
 }

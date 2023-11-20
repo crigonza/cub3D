@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itorres- <itorres-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 17:33:16 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/14 13:52:36 by itorres-         ###   ########.fr       */
+/*   Updated: 2023/11/20 19:30:20 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,31 +57,26 @@ int	is_valid_color(char *line)
 	return (1);
 }
 
-void	parse_colors(t_data *data, int fd, int lines)
+void	parse_textures_aux(t_data *data, char *line)
 {
-	char	*line;
-
-	line = NULL;
-	line = get_next_line(fd);
-	while (line)
+	if (line[0] == 'F')
 	{
-		if (!ft_strncmp(line, "F ", 2))
-		{
-			if (is_valid_color(line))
-				data->floor = get_color(ft_substr(line, 2, ft_strlen(line)));
-		}
-		if (!ft_strncmp(line, "C ", 2))
-		{
-			if (is_valid_color(line))
-				data->ceiling = get_color(ft_substr(line, 2, ft_strlen(line)));
-		}
-		free(line);
-		lines++;
-		if (data->ceiling.red != -1)
-			break ;
-		line = get_next_line(fd);
+		if (is_valid_color(line))
+			data->floor = get_color(ft_substr(line, 2, ft_strlen(line)));
 	}
-	map_data(data, fd, lines);
+	if (line[0] == 'C')
+	{
+		if (is_valid_color(line))
+			data->ceiling = get_color(ft_substr(line, 2, ft_strlen(line)));
+	}
+	if (line[0] == 'N')
+		data->north = get_path(line);
+	if (line[0] == 'S')
+		data->south = get_path(line);
+	if (line[0] == 'W')
+		data->west = get_path(line);
+	if (line[0] == 'E')
+		data->east = get_path(line);
 }
 
 void	parse_textures(t_data *data, int fd)
@@ -94,21 +89,23 @@ void	parse_textures(t_data *data, int fd)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (!ft_strncmp(line, "NO ", 3) && data->north == NULL)
-			data->north = get_path(line);
-		if (!ft_strncmp(line, "SO ", 3) && data->north != NULL)
-			data->south = get_path(line);
-		if (!ft_strncmp(line, "WE ", 3) && data->south != NULL)
-			data->west = get_path(line);
-		if (!ft_strncmp(line, "EA ", 3) && data->west != NULL)
-			data->east = get_path(line);
+		if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3)
+			|| !ft_strncmp(line, "WE ", 3) || !ft_strncmp(line, "EA ", 3)
+			|| !ft_strncmp(line, "F ", 2) || !ft_strncmp(line, "C ", 2))
+			parse_textures_aux(data, line);
+		else
+		{
+			if (check_map_ini(line))
+				break ;
+		}
 		free(line);
 		lines++;
-		if (data->north && data->south && data->west && data->east)
+		if (data->north && data->south && data->west && data->east
+			&& data->ceiling.red != -1 && data->floor.red != -1)
 			break ;
 		line = get_next_line(fd);
 	}
-	parse_colors(data, fd, lines);
+	map_data(data, fd, lines);
 }
 
 void	parse_map(t_data *data, int fd, t_game *game)
