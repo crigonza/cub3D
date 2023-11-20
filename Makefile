@@ -20,7 +20,6 @@ LIBFT	= ./Libft
 
 HEADERS	= -I ./inc -I $(LIBMLX)/include -I $(LIBFT)/include
 LIBS	= -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
-# LIBS	= -lglfw -L /opt/homebrew/cellar/glfw/3.3.8/lib $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
 SRCS	= src/check_map.c src/checker.c src/controls.c src/draw.c \
 			src/free_utils.c src/hooks.c src/initialize.c src/main.c \
 			src/parse_utils.c src/parser.c src/raycast.c \
