@@ -66,6 +66,8 @@ int	check_map_point(char **map, int y, int x)
 		return (0);
 	else if (map[y - 1][x] == 32 || map[y + 1][x] == 32)
 		return (0);
+	else if (map[y - 1][x] == 10  || map[y + 1][x] == 10)
+		return (0);
 	return (1);
 }
 
