@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:47:24 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/21 10:41:06 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:04:36 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,14 +135,14 @@ int	check_data(t_data *data, t_game *game)
 		ft_putendl_fd("Error: invalid map.", 2);
 		return (0);
 	}
-	if (!check_player(game) || !check_player_duplicate(game))
-	{
-		ft_putendl_fd("Error: missing player start point.", 2);
-		return (0);
-	}
 	if (!check_map(game->map))
 	{
 		ft_putendl_fd("Error: invalid map.", 2);
+		return (0);
+	}
+	if (!check_player(game) || !check_player_duplicate(game))
+	{
+		ft_putendl_fd("Error: missing player start point.", 2);
 		return (0);
 	}
 	return (1);

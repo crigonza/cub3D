@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 17:33:16 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/21 10:47:05 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:07:51 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ void	map_data(t_data *data, int fd, int lines)
 		if (!spaces_line(line))
 			map_len++;
 		else
+		{
+			if (map_len > 0)
+				break ;
 			lines++;
+		}
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -128,14 +132,6 @@ void	parse_map(t_data *data, int fd, t_game *game)
 		if (width < len)
 			width = len;
 		free(line);
-		i++;
-	}
-	game->map.map_w = width;
-
-	i = 0;
-	while (i < data->map_lines)
-	{
-		printf("%s", game->map.map_array[i]);
 		i++;
 	}
 }

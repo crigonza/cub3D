@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 17:33:16 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/20 19:30:20 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:08:09 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ void	map_data(t_data *data, int fd, int lines)
 		if (!spaces_line(line))
 			map_len++;
 		else
+		{
+			if (map_len > 0)
+				break ;
 			lines++;
+		}
 		free(line);
 		line = get_next_line(fd);
 	}
