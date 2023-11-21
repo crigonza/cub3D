@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:08:18 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/21 10:42:59 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:07:51 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	check_map(t_map map)
 	while (y < map.map_h - 1)
 	{
 		x = 0;
-		while (x < map.map_w)
+		while (map.map_array[y][x])
 		{
 			if (map.map_array[y][x] == '0')
 			{
