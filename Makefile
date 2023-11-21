@@ -6,7 +6,7 @@
 #    By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/18 19:27:43 by crigonza          #+#    #+#              #
-#    Updated: 2023/11/20 17:31:51 by crigonza         ###   ########.fr        #
+#    Updated: 2023/11/21 09:50:45 by crigonza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,8 @@ LIBMLX	= ./MLX42
 LIBFT	= ./Libft
 
 HEADERS	= -I ./inc -I $(LIBMLX)/include -I $(LIBFT)/include
-# LIBS	= -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
-LIBS	= -lglfw -L /opt/homebrew/cellar/glfw/3.3.8/lib $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
+LIBS	= -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
+# LIBS	= -lglfw -L /opt/homebrew/cellar/glfw/3.3.8/lib $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
 SRCS	= src/check_map.c src/checker.c src/controls.c src/draw.c \
 			src/free_utils.c src/hooks.c src/initialize.c src/main.c \
 			src/parse_utils.c src/parser.c src/raycast.c \

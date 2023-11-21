@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:23:24 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/20 19:32:45 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/21 09:50:20 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	set_dir(t_player *player, char dir);
 // parser.c//
 void	map_data(t_data *data, int fd, int lines);
 int		is_valid_color(char *line);
-void	parse_textures_aux(t_data *data, int line);
+void	parse_textures_aux(t_data *data, char *line);
 void	parse_textures(t_data *data, int fd);
 void	parse_map(t_data *data, int fd, t_game *game);
 // raycast.c//

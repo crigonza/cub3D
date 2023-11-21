@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:08:18 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/20 19:22:00 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/21 10:42:59 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int	check_map_point(char **map, int y, int x)
 	else if (map[y][x - 1] == 10 || map[y][x + 1] == 10)
 		return (0);
 	else if (map[y - 1][x] == 32 || map[y + 1][x] == 32)
+		return (0);
+	else if (map[y - 1][x] == '\n' || map[y + 1][x] == '\n')
 		return (0);
 	else if (map[y - 1][x] == '\0' || map[y + 1][x] == '\0')
 		return (0);

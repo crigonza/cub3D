@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:29:04 by crigonza          #+#    #+#             */
-/*   Updated: 2023/11/20 19:28:28 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/11/21 10:20:11 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	if (!check_args(argc, argv, &game))
+	if (!check_args(argc, argv))
 		exit(EXIT_FAILURE);
 	check_bonus(argv[1], &game);
 	parse_and_check(&game, argv[1]);
